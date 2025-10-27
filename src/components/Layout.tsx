@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import Header from './Header';
+import BackToTop from './BackToTop';
 
 interface LayoutProps {
   children: ReactNode;
@@ -15,6 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
           &copy; 2025 <b>PT Mangatur Dharma</b>
         </p>
       </footer>
+      <BackToTop />
     </div>
   );
 };

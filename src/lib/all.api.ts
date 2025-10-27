@@ -63,6 +63,28 @@ export async function getListCustomers(): Promise<any[]> {
   return [];
 }
 
+// ==================== KATEGORI PELANGGAN ====================
+export async function getCustomerCategories(): Promise<any[]> {
+  const objParams = {
+    params: {
+      Method: 'LoadGrid',
+      Controller: 'TBLSYS',
+      ApiDB: AppConfig.apiDB,
+      sqlCondition: ` and tsdpfg = '1' and tsdscd = 'CUSTCAT'`,
+    },
+  };
+  try {
+    const response = await fetchingApi(`${AppConfig.apiUrl}/getDataCms`, objParams);
+    if (response?.data?.items) {
+      return response.data.items;
+    }
+  } catch (error) {
+    console.error('Gagal mengambil kategori pelanggan:', error);
+    return [];
+  }
+  return [];
+}
+
 // ==================== BERITA ====================
 export async function getListNews(): Promise<any[]> {
   const objParams = {
@@ -84,6 +106,73 @@ export async function getListNews(): Promise<any[]> {
   return [];
 }
 
+// ==================== KATEGORI BERITA ====================
+export async function getNewsCategories(): Promise<any[]> {
+  const objParams = {
+    params: {
+      Method: 'LoadGrid',
+      Controller: 'TBLSYS',
+      ApiDB: AppConfig.apiDB,
+      sqlCondition: ` and tsdpfg = '1' and tsdscd = 'NEWSCAT'`,
+    },
+  };
+  try {
+    const response = await fetchingApi(`${AppConfig.apiUrl}/getDataCms`, objParams);
+    if (response?.data?.items) {
+      return response.data.items;
+    }
+  } catch (error) {
+    console.error('Gagal mengambil kategori news:', error);
+    return [];
+  }
+  return [];
+}
+
+
+
+// ==================== ARTIKEL ====================
+export async function getListArtikel(): Promise<any[]> {
+  const objParams = {
+    params: {
+      Method: 'LoadGrid',
+      Controller: 'CMARTK',
+      ApiDB: AppConfig.apiDB,
+    },
+  };
+  try {
+    const response = await fetchingApi(`${AppConfig.apiUrl}/getDataCms`, objParams);
+    if (response?.data?.items) {
+      return response.data.items;
+    }
+  } catch (error) {
+    console.error('Gagal mengambil data artikel:', error);
+    return [];
+  }
+  return [];
+}
+
+// ==================== KATEGORI ARTIKEL ====================
+export async function getArticleCategories(): Promise<any[]> {
+  const objParams = {
+    params: {
+      Method: 'LoadGrid',
+      Controller: 'TBLSYS',
+      ApiDB: AppConfig.apiDB,
+      sqlCondition: ` and tsdpfg = '1' and tsdscd = 'ARTCAT'`,
+    },
+  };
+  try {
+    const response = await fetchingApi(`${AppConfig.apiUrl}/getDataCms`, objParams);
+    if (response?.data?.items) {
+      return response.data.items;
+    }
+  } catch (error) {
+    console.error('Gagal mengambil kategori artikel:', error);
+    return [];
+  }
+  return [];
+}
+
 // ==================== PRODUK ====================
 export async function getListProducts(): Promise<any[]> {
   const objParams = {
@@ -100,6 +189,28 @@ export async function getListProducts(): Promise<any[]> {
     }
   } catch (error) {
     console.error('Gagal mengambil data produk:', error);
+    return [];
+  }
+  return [];
+}
+
+// ==================== KATEGORI PRODUK ====================
+export async function getProductCategories(): Promise<any[]> {
+  const objParams = {
+    params: {
+      Method: 'LoadGrid',
+      Controller: 'TBLSYS',
+      ApiDB: AppConfig.apiDB,
+      sqlCondition: ` and tsdpfg = '1' and tsdscd = 'PRODCAT'`,
+    },
+  };
+  try {
+    const response = await fetchingApi(`${AppConfig.apiUrl}/getDataCms`, objParams);
+    if (response?.data?.items) {
+      return response.data.items;
+    }
+  } catch (error) {
+    console.error('Gagal mengambil kategori produk:', error);
     return [];
   }
   return [];

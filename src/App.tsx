@@ -10,12 +10,13 @@ import JejakLangkah from './pages/JejakLangkah';
 import VisiMisi from './pages/VisiMisi';
 import Kontak from './pages/Kontak';
 import Penghargaan from './pages/news/Penghargaan';
-import Aktifitas from './pages/news/Aktifitas';
-import Artikel from './pages/news/Artikel';
 import DaftarPelanggan from './pages/news/DaftarPelanggan';
 import OurCategory from './pages/our-category';
 import Test from './pages/test-page';
-import HVAC from './pages/produk/hvac';
+import ProductCategory from './pages/produk/ProductCategory';
+import ContentPage from './pages/news/Content';
+import MoreContentPage from './pages/news/MoreContent';
+import ContentDetail from './pages/news/ContentDetail';
 
 const queryClient = new QueryClient();
 
@@ -27,18 +28,20 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/tentang-perusahaan" element={<TentangPerusahaan />} />
-          <Route path="/jejak-langkah" element={<JejakLangkah />} />
-          <Route path="/visi-misi" element={<VisiMisi />} />
+          <Route path="/profil/tentang-perusahaan" element={<TentangPerusahaan />} />
+          <Route path="/profil/jejak-langkah" element={<JejakLangkah />} />
+          <Route path="/profil/visi-misi" element={<VisiMisi />} />
           <Route path="/kontak" element={<Kontak />} />
-          <Route path="/our-category" element={<OurCategory />} />
-          <Route path="/penghargaan" element={<Penghargaan />} />
-          <Route path="/aktifitas" element={<Aktifitas />} />
-          <Route path="/artikel" element={<Artikel />} />
-          <Route path="/daftar-pelanggan" element={<DaftarPelanggan />} />
-          <Route path="/test-page" element={<Test />} />
-          <Route path="/hvac" element={<HVAC />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/area-bisnis" element={<OurCategory />} />
+          <Route path="/berita/penghargaan" element={<Penghargaan />} />
+          <Route path="/berita/daftar-pelanggan" element={<DaftarPelanggan />} />
+          {/* <Route path="/test-page" element={<Test />} /> */}
+          <Route path="/produk/:categorySlug" element={<ProductCategory />} />
+
+          <Route path="/berita/:type" element={<ContentPage />} />
+          <Route path="/berita/:type/more" element={<MoreContentPage />} />
+          <Route path="/berita/:type/detail/:id" element={<ContentDetail />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

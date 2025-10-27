@@ -58,14 +58,20 @@ const Test = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loading, setLoading] = useState(true);
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
+  const [searchQuery, setSearchQuery] = useState(''); // 🔍 state untuk pencarian
 
   // State untuk semua data API
   const [apiData, setApiData] = useState({
     awardsHeader: [],
     awardsDetail: [],
     customers: [],
+    customerCategories: [],
     news: [],
+    newsCategories: [],
+    artikel: [],
+    articleCategories: [],
     products: [],
+    productCategories: [],
     runningTransactionNo: [],
     descriptions: [],
     errorLogFiles: [],
@@ -109,7 +115,7 @@ const Test = () => {
   const toggleSection = (key: string) => {
     setOpenSections(prev => ({
       ...prev,
-      [key]: !prev[key]
+      [key]: !prev[key],
     }));
   };
 
@@ -126,40 +132,17 @@ const Test = () => {
     const fetchData = async () => {
       try {
         console.log('🔄 Mengambil data dari API...');
-        
-        const [
-          awardsHeader,
-          awardsDetail,
-          customers,
-          news,
-          products,
-          runningTransactionNo,
-          descriptions,
-          errorLogFiles,
-          historyLogin,
-          historySintax,
-          menus,
-          runningNo,
-          prosesBatchLogFiles,
-          parameters,
-          sintaxLogFiles,
-          systems,
-          userAccessMenuHistory,
-          userAccessMenu,
-          userEnableDisableHistory,
-          userPasswordHistory,
-          userOtherAccess,
-          users,
-          userTokens,
-          versionHistory,
-          versions,
-          sintaxLogfileExec,
-        ] = await Promise.all([
+        const responses = await Promise.all([
           API.getListAwardsHeader(),
           API.getListAwardsDetail(),
           API.getListCustomers(),
+          API.getCustomerCategories(),
           API.getListNews(),
+          API.getNewsCategories(),
+          API.getListArtikel(),
+          API.getArticleCategories(),
           API.getListProducts(),
+          API.getProductCategories(),
           API.getRunningTransactionNo(),
           API.getDescriptions(),
           API.getErrorLogFiles(),
@@ -184,32 +167,37 @@ const Test = () => {
         ]);
 
         setApiData({
-          awardsHeader,
-          awardsDetail,
-          customers,
-          news,
-          products,
-          runningTransactionNo,
-          descriptions,
-          errorLogFiles,
-          historyLogin,
-          historySintax,
-          menus,
-          runningNo,
-          prosesBatchLogFiles,
-          parameters,
-          sintaxLogFiles,
-          systems,
-          userAccessMenuHistory,
-          userAccessMenu,
-          userEnableDisableHistory,
-          userPasswordHistory,
-          userOtherAccess,
-          users,
-          userTokens,
-          versionHistory,
-          versions,
-          sintaxLogfileExec,
+          awardsHeader: responses[0],
+          awardsDetail: responses[1],
+          customers: responses[2],
+          customerCategories: responses[3],
+          news: responses[4],
+          newsCategories: responses[5],
+          artikel: responses[6],
+          articleCategories: responses[7],
+          products: responses[8],
+          productCategories: responses[9],
+          runningTransactionNo: responses[10],
+          descriptions: responses[11],
+          errorLogFiles: responses[12],
+          historyLogin: responses[13],
+          historySintax: responses[14],
+          menus: responses[15],
+          runningNo: responses[16],
+          prosesBatchLogFiles: responses[17],
+          parameters: responses[18],
+          sintaxLogFiles: responses[19],
+          systems: responses[20],
+          userAccessMenuHistory: responses[21],
+          userAccessMenu: responses[22],
+          userEnableDisableHistory: responses[23],
+          userPasswordHistory: responses[24],
+          userOtherAccess: responses[25],
+          users: responses[26],
+          userTokens: responses[27],
+          versionHistory: responses[28],
+          versions: responses[29],
+          sintaxLogfileExec: responses[30],
         });
 
         console.log('✅ Semua data berhasil dimuat');
@@ -226,8 +214,13 @@ const Test = () => {
     { key: 'awardsHeader', title: 'Awards Header (CMAWRH)', data: apiData.awardsHeader },
     { key: 'awardsDetail', title: 'Awards Detail (CMAWRD)', data: apiData.awardsDetail },
     { key: 'customers', title: 'Customers (CMCSTM)', data: apiData.customers },
+    { key: 'customerCategories', title: 'Customer Categories (TBLSYS - CUSTCAT)', data: apiData.customerCategories },
     { key: 'news', title: 'News (CMNEWS)', data: apiData.news },
+    { key: 'newsCategories', title: 'News Categories (TBLSYS - NEWSCAT)', data: apiData.newsCategories },
+    { key: 'artikel', title: 'Artikel (CMARTK)', data: apiData.artikel },
+    { key: 'articleCategories', title: 'Article Categories (TBLSYS - ARTCAT)', data: apiData.articleCategories },
     { key: 'products', title: 'Products (CMPROD)', data: apiData.products },
+    { key: 'productCategories', title: 'Product Categories (TBLSYS - PRODCAT)', data: apiData.productCategories },
     { key: 'runningTransactionNo', title: 'Running Transaction No (CSYNBR)', data: apiData.runningTransactionNo },
     { key: 'descriptions', title: 'Descriptions (TBLDSC)', data: apiData.descriptions },
     { key: 'errorLogFiles', title: 'Error Log Files (TBLELF)', data: apiData.errorLogFiles },
@@ -250,6 +243,11 @@ const Test = () => {
     { key: 'versions', title: 'Versions (TBLVRS)', data: apiData.versions },
     { key: 'sintaxLogfileExec', title: 'Sintax Logfile Exec (TBLXLF)', data: apiData.sintaxLogfileExec },
   ];
+
+  // 🔍 Filter section berdasarkan query
+  const filteredSections = apiSections.filter(section =>
+    section.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <Layout>
@@ -274,14 +272,23 @@ const Test = () => {
       {/* API Data Section */}
       <section className="p-6 bg-gray-100 min-h-screen">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
             <h1 className="text-3xl font-bold text-gray-800">API Data Testing</h1>
-            <button
-              onClick={toggleAll}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              {Object.values(openSections).some(v => v) ? 'Tutup Semua' : 'Buka Semua'}
-            </button>
+            <div className="flex items-center gap-3 w-full sm:w-auto">
+              <input
+                type="text"
+                placeholder="Cari section API..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 sm:w-64 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                onClick={toggleAll}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                {Object.values(openSections).some(v => v) ? 'Tutup Semua' : 'Buka Semua'}
+              </button>
+            </div>
           </div>
 
           {loading ? (
@@ -291,16 +298,22 @@ const Test = () => {
             </div>
           ) : (
             <div className="space-y-0">
-              {apiSections.map(section => (
-                <AccordionItem
-                  key={section.key}
-                  title={section.title}
-                  data={section.data}
-                  loading={false}
-                  isOpen={openSections[section.key] || false}
-                  onToggle={() => toggleSection(section.key)}
-                />
-              ))}
+              {filteredSections.length > 0 ? (
+                filteredSections.map(section => (
+                  <AccordionItem
+                    key={section.key}
+                    title={section.title}
+                    data={section.data}
+                    loading={false}
+                    isOpen={openSections[section.key] || false}
+                    onToggle={() => toggleSection(section.key)}
+                  />
+                ))
+              ) : (
+                <p className="text-gray-500 italic text-center py-6">
+                  Tidak ada hasil untuk “{searchQuery}”
+                </p>
+              )}
             </div>
           )}
         </div>
