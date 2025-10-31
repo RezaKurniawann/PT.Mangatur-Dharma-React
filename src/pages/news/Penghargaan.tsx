@@ -1,7 +1,7 @@
-import Layout from '@/components/Layout';
-import React, { useState, useEffect } from 'react';
-import { getListAwards } from '@/lib/awards.api';
-import { ChevronLeft, ChevronRight, X, Search, Calendar } from 'lucide-react';
+import Layout from "@/components/Layout";
+import React, { useState, useEffect } from "react";
+import { getListAwards } from "@/lib/awards.api";
+import { ChevronLeft, ChevronRight, X, Search, Calendar } from "lucide-react";
 
 interface AwardDetail {
   dwpinoiy: number;
@@ -24,11 +24,11 @@ const Penghargaan = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentImages, setCurrentImages] = useState<string[]>([]);
-  
+
   // Filter states
-  const [searchTerm, setSearchTerm] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const startDateInputRef = React.useRef<HTMLInputElement>(null);
   const endDateInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -43,7 +43,7 @@ const Penghargaan = () => {
         });
         setAwards(sortedData);
       } catch (error) {
-        console.error('Gagal memuat data penghargaan:', error);
+        console.error("Gagal memuat data penghargaan:", error);
       }
       setLoading(false);
     };
@@ -53,22 +53,35 @@ const Penghargaan = () => {
 
   // Format cwdate (YYYYMMDD) to "27 Okt 2025"
   const formatDateDisplay = (dateStr: string): string => {
-    if (!dateStr || dateStr.length !== 8) return '';
-    
+    if (!dateStr || dateStr.length !== 8) return "";
+
     const year = dateStr.substring(0, 4);
     const month = dateStr.substring(4, 6);
     const day = dateStr.substring(6, 8);
-    
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "Mei",
+      "Jun",
+      "Jul",
+      "Agu",
+      "Sep",
+      "Okt",
+      "Nov",
+      "Des",
+    ];
     const monthIndex = parseInt(month) - 1;
-    
+
     return `${parseInt(day)} ${monthNames[monthIndex]} ${year}`;
   };
 
   // Convert date input (YYYY-MM-DD) to cwdate format (YYYYMMDD)
   const convertToDateFormat = (dateInput: string): string => {
-    if (!dateInput) return '';
-    return dateInput.replace(/-/g, '');
+    if (!dateInput) return "";
+    return dateInput.replace(/-/g, "");
   };
 
   // Handle date selection from hidden input
@@ -89,28 +102,29 @@ const Penghargaan = () => {
   };
 
   // Filter awards
-  const filteredAwards = awards.filter(award => {
+  const filteredAwards = awards.filter((award) => {
     // Search filter
-    const matchesSearch = award.cwtitl.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         award.cwdesc.toLowerCase().includes(searchTerm.toLowerCase());
-    
+    const matchesSearch =
+      award.cwtitl.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      award.cwdesc.toLowerCase().includes(searchTerm.toLowerCase());
+
     // Date range filter
     let matchesDateRange = true;
     if (startDate || endDate) {
       const awardDate = parseInt(award.cwdate);
       const start = startDate ? parseInt(startDate) : 0;
       const end = endDate ? parseInt(endDate) : 99999999;
-      
+
       matchesDateRange = awardDate >= start && awardDate <= end;
     }
-    
+
     return matchesSearch && matchesDateRange;
   });
 
   const getAllImages = (award: Award): string[] => {
     const images = [award.file];
     if (award.detail && award.detail.length > 0) {
-      award.detail.forEach(detail => {
+      award.detail.forEach((detail) => {
         if (detail.file) {
           images.push(detail.file);
         }
@@ -133,22 +147,24 @@ const Penghargaan = () => {
 
   const goToPrevImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const newIndex = currentImageIndex > 0 ? currentImageIndex - 1 : currentImages.length - 1;
+    const newIndex =
+      currentImageIndex > 0 ? currentImageIndex - 1 : currentImages.length - 1;
     setCurrentImageIndex(newIndex);
     setSelectedImage(currentImages[newIndex]);
   };
 
   const goToNextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const newIndex = currentImageIndex < currentImages.length - 1 ? currentImageIndex + 1 : 0;
+    const newIndex =
+      currentImageIndex < currentImages.length - 1 ? currentImageIndex + 1 : 0;
     setCurrentImageIndex(newIndex);
     setSelectedImage(currentImages[newIndex]);
   };
 
   const resetFilters = () => {
-    setSearchTerm('');
-    setStartDate('');
-    setEndDate('');
+    setSearchTerm("");
+    setStartDate("");
+    setEndDate("");
   };
 
   const AwardCard = ({ award, index }: { award: Award; index: number }) => {
@@ -158,30 +174,30 @@ const Penghargaan = () => {
 
     const handlePrevSlide = (e: React.MouseEvent) => {
       e.stopPropagation();
-      setCurrentSlide(prev => prev > 0 ? prev - 1 : allImages.length - 1);
+      setCurrentSlide((prev) => (prev > 0 ? prev - 1 : allImages.length - 1));
     };
 
     const handleNextSlide = (e: React.MouseEvent) => {
       e.stopPropagation();
-      setCurrentSlide(prev => prev < allImages.length - 1 ? prev + 1 : 0);
+      setCurrentSlide((prev) => (prev < allImages.length - 1 ? prev + 1 : 0));
     };
 
     const isDescriptionLong = award.cwdesc && award.cwdesc.length > 100;
 
     return (
-      <div 
-        key={index} 
+      <div
+        key={index}
         className="bg-white p-6 rounded-lg shadow-lg border border-gray-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
       >
         {/* Image Carousel */}
         <div className="relative h-64 rounded-lg overflow-hidden flex justify-center items-center bg-gray-50 group">
-          <img 
-            src={allImages[currentSlide]} 
+          <img
+            src={allImages[currentSlide]}
             alt={`${award.cwtitl} - Image ${currentSlide + 1}`}
             className="max-w-full max-h-full object-contain cursor-pointer"
             onClick={() => openImagePreview(allImages, currentSlide)}
           />
-          
+
           {allImages.length > 1 && (
             <>
               <button
@@ -191,7 +207,7 @@ const Penghargaan = () => {
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
-              
+
               <button
                 onClick={handleNextSlide}
                 className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
@@ -209,9 +225,9 @@ const Penghargaan = () => {
                       setCurrentSlide(idx);
                     }}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      idx === currentSlide 
-                        ? 'bg-white w-6' 
-                        : 'bg-white/50 hover:bg-white/75'
+                      idx === currentSlide
+                        ? "bg-white w-6"
+                        : "bg-white/50 hover:bg-white/75"
                     }`}
                     aria-label={`Go to image ${idx + 1}`}
                   />
@@ -233,21 +249,21 @@ const Penghargaan = () => {
         </h3>
 
         <div className="relative mt-2">
-          <p 
+          <p
             className={`text-center mt-2 text-gray-600 text-sm line-clamp-3 ${
-              isDescriptionLong ? 'cursor-help' : ''
+              isDescriptionLong ? "cursor-help" : ""
             }`}
-            onMouseEnter={() => isDescriptionLong && setShowDescriptionTooltip(true)}
+            onMouseEnter={() =>
+              isDescriptionLong && setShowDescriptionTooltip(true)
+            }
             onMouseLeave={() => setShowDescriptionTooltip(false)}
           >
             {award.cwdesc}
           </p>
-          
+
           {showDescriptionTooltip && isDescriptionLong && (
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-80 max-w-[90vw] bg-gray-900 text-white text-sm rounded-lg p-4 shadow-xl z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
-              <div className="max-h-60 overflow-y-auto">
-                {award.cwdesc}
-              </div>
+              <div className="max-h-60 overflow-y-auto">{award.cwdesc}</div>
               <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1">
                 <div className="border-8 border-transparent border-t-gray-900"></div>
               </div>
@@ -268,17 +284,17 @@ const Penghargaan = () => {
           </div>
         </div>
         <div className="absolute inset-0">
-          <img 
-            src="/assets/img/item/bg-1.png" 
-            alt="Background" 
-            className="w-full h-full object-cover opacity-90" 
+          <img
+            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-1.png`}
+            alt="Background"
+            className="w-full h-full object-cover opacity-90"
           />
         </div>
         <div className="absolute bottom-0 right-12 mr-10 transform translate-x-1/4 translate-y-1/4">
-          <img 
-            src="/assets/img/item/icon-6.png" 
-            alt="Awards Icon" 
-            className="w-36 sm:w-36 md:w-48 object-contain animate-leftright" 
+          <img
+            src={`${import.meta.env.BASE_URL}/assets/img/item/icon-6.png`}
+            alt="Awards Icon"
+            className="w-36 sm:w-36 md:w-48 object-contain animate-leftright"
           />
         </div>
       </div>
@@ -287,7 +303,9 @@ const Penghargaan = () => {
       <div className="container mx-auto px-4 py-10">
         <div className="flex items-center">
           <div className="bg-primary h-12 w-1 mr-4"></div>
-          <h2 className="text-2xl font-bold text-gray-800">Semua Penghargaan</h2>
+          <h2 className="text-2xl font-bold text-gray-800">
+            Semua Penghargaan
+          </h2>
           <div className="flex-grow border-t-4 border-gray-700 ml-4"></div>
         </div>
       </div>
@@ -327,7 +345,9 @@ const Penghargaan = () => {
                 />
                 {startDate ? (
                   <div className="absolute inset-0 flex items-center px-4 pointer-events-none">
-                    <span className="text-gray-900">{formatDateDisplay(startDate)}</span>
+                    <span className="text-gray-900">
+                      {formatDateDisplay(startDate)}
+                    </span>
                   </div>
                 ) : (
                   <div className="absolute inset-0 flex items-center px-4 pointer-events-none">
@@ -338,9 +358,9 @@ const Penghargaan = () => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      setStartDate('');
+                      setStartDate("");
                       if (startDateInputRef.current) {
-                        startDateInputRef.current.value = '';
+                        startDateInputRef.current.value = "";
                       }
                     }}
                     className="absolute right-10 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 z-10"
@@ -365,7 +385,9 @@ const Penghargaan = () => {
                 />
                 {endDate ? (
                   <div className="absolute inset-0 flex items-center px-4 pointer-events-none">
-                    <span className="text-gray-900">{formatDateDisplay(endDate)}</span>
+                    <span className="text-gray-900">
+                      {formatDateDisplay(endDate)}
+                    </span>
                   </div>
                 ) : (
                   <div className="absolute inset-0 flex items-center px-4 pointer-events-none">
@@ -376,9 +398,9 @@ const Penghargaan = () => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      setEndDate('');
+                      setEndDate("");
                       if (endDateInputRef.current) {
-                        endDateInputRef.current.value = '';
+                        endDateInputRef.current.value = "";
                       }
                     }}
                     className="absolute right-10 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 z-10"
@@ -393,7 +415,12 @@ const Penghargaan = () => {
           {/* Filter Actions */}
           <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
             <div className="text-sm text-gray-600">
-              Menampilkan <span className="font-semibold text-primary">{filteredAwards.length}</span> dari <span className="font-semibold">{awards.length}</span> penghargaan
+              Menampilkan{" "}
+              <span className="font-semibold text-primary">
+                {filteredAwards.length}
+              </span>{" "}
+              dari <span className="font-semibold">{awards.length}</span>{" "}
+              penghargaan
             </div>
             {(searchTerm || startDate || endDate) && (
               <button
@@ -447,7 +474,7 @@ const Penghargaan = () => {
 
       {/* Image Preview Modal */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
           onClick={closeImagePreview}
         >
@@ -468,7 +495,7 @@ const Penghargaan = () => {
               >
                 <ChevronLeft className="w-8 h-8" />
               </button>
-              
+
               <button
                 onClick={goToNextImage}
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors z-50"
@@ -480,8 +507,8 @@ const Penghargaan = () => {
           )}
 
           <div className="max-w-6xl max-h-[90vh] flex items-center justify-center">
-            <img 
-              src={selectedImage} 
+            <img
+              src={selectedImage}
               alt="Preview"
               className="max-w-full max-h-full object-contain"
               onClick={(e) => e.stopPropagation()}

@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import Layout from '@/components/Layout';
-import { getListCustomers, getCustomerCategories } from '@/lib/all.api';
+import { useState, useEffect } from "react";
+import Layout from "@/components/Layout";
+import { getListCustomers, getCustomerCategories } from "@/lib/all.api";
 
 const DaftarPelanggan = () => {
-  const [activeTab, setActiveTab] = useState('');
+  const [activeTab, setActiveTab] = useState("");
   const [categories, setCategories] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const DaftarPelanggan = () => {
       try {
         const [categoriesData, customersData] = await Promise.all([
           getCustomerCategories(),
-          getListCustomers()
+          getListCustomers(),
         ]);
 
         setCategories(categoriesData);
@@ -25,7 +25,7 @@ const DaftarPelanggan = () => {
           setActiveTab(categoriesData[0].tssynm);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
@@ -36,14 +36,14 @@ const DaftarPelanggan = () => {
 
   // Filter pelanggan berdasarkan kategori aktif
   const filteredCustomers = customers
-    .filter(customer => customer.category === activeTab)
+    .filter((customer) => customer.category === activeTab)
     .sort((a, b) => {
-      const dateA = new Date(a['cacsdt::bpchar'] || a.cacsdt || 0);
-      const dateB = new Date(b['cacsdt::bpchar'] || b.cacsdt || 0);
+      const dateA = new Date(a["cacsdt::bpchar"] || a.cacsdt || 0);
+      const dateB = new Date(b["cacsdt::bpchar"] || b.cacsdt || 0);
       return dateB.getTime() - dateA.getTime();
     });
 
-  const activeCategory = categories.find(c => c.tssynm === activeTab);
+  const activeCategory = categories.find((c) => c.tssynm === activeTab);
 
   return (
     <Layout>
@@ -59,7 +59,7 @@ const DaftarPelanggan = () => {
 
         <div className="absolute inset-0">
           <img
-            src="/assets/img/item/bg-1.png"
+            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-1.png`}
             alt="Modern office building"
             className="w-full h-full object-cover opacity-90"
           />
@@ -67,7 +67,7 @@ const DaftarPelanggan = () => {
 
         <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pr-4 sm:pr-8 md:pr-12">
           <h1 className="font-bold text-3xl sm:text-5xl md:text-7xl">
-            {activeCategory?.tssynm || 'HVAC'}
+            {activeCategory?.tssynm || "HVAC"}
           </h1>
         </div>
       </div>
@@ -78,7 +78,7 @@ const DaftarPelanggan = () => {
           <div className="flex overflow-x-auto scrollbar-hide">
             {loading ? (
               <div className="flex space-x-4 py-4 px-4">
-                {[1, 2, 3, 4, 5].map(i => (
+                {[1, 2, 3, 4, 5].map((i) => (
                   <div
                     key={i}
                     className="h-10 w-32 bg-gray-200 animate-pulse rounded"
@@ -87,14 +87,14 @@ const DaftarPelanggan = () => {
               </div>
             ) : (
               <div className="flex w-full">
-                {categories.map(category => (
+                {categories.map((category) => (
                   <button
                     key={category.tssycd}
                     onClick={() => setActiveTab(category.tssynm)}
                     className={`flex-1 px-6 py-4 font-semibold whitespace-nowrap transition-all duration-200 border-b-2 ${
                       activeTab === category.tssynm
-                        ? 'border-primary text-primary bg-primary/5'
-                        : 'border-transparent text-gray-600 hover:text-primary hover:bg-gray-50'
+                        ? "border-primary text-primary bg-primary/5"
+                        : "border-transparent text-gray-600 hover:text-primary hover:bg-gray-50"
                     }`}
                   >
                     {category.tssynm}
@@ -112,7 +112,7 @@ const DaftarPelanggan = () => {
           {loading ? (
             // Loading Skeleton
             <div className="flex flex-wrap justify-center gap-6 w-full max-w-7xl">
-              {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
                 <div
                   key={i}
                   className="bg-white rounded-lg shadow-md p-6 animate-pulse w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
@@ -135,9 +135,11 @@ const DaftarPelanggan = () => {
                       src={customer.file}
                       alt={customer.cacsnm}
                       className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                      onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                      onError={(
+                        e: React.SyntheticEvent<HTMLImageElement, Event>
+                      ) => {
                         e.currentTarget.src =
-                          'https://via.placeholder.com/400x250/E5E7EB/9CA3AF?text=No+Image';
+                          "https://via.placeholder.com/400x250/E5E7EB/9CA3AF?text=No+Image";
                       }}
                       loading="lazy"
                     />
@@ -172,7 +174,8 @@ const DaftarPelanggan = () => {
                 Belum Ada Pelanggan
               </h3>
               <p className="text-gray-500">
-                Belum ada pelanggan di kategori {activeCategory?.tssynm || 'ini'}
+                Belum ada pelanggan di kategori{" "}
+                {activeCategory?.tssynm || "ini"}
               </p>
             </div>
           )}

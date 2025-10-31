@@ -1,7 +1,7 @@
-import Layout from '@/components/Layout';
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
-import * as API from '@/lib/all.api';
+import Layout from "@/components/Layout";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
+import * as API from "@/lib/all.api";
 
 // --- START: useDebounce Hook ---
 /**
@@ -37,7 +37,7 @@ interface ContentItem {
   cbchid?: string;
   cbpsdt?: string;
   cbcsdt?: string;
-  'cbcsdt::bpchar'?: string;
+  "cbcsdt::bpchar"?: string;
   // Article fields
   cecenoiy?: number;
   cetitl?: string;
@@ -45,7 +45,7 @@ interface ContentItem {
   cechid?: string;
   cepsdt?: string;
   cecsdt?: string;
-  'cecsdt::bpchar'?: string;
+  "cecsdt::bpchar"?: string;
   // Common fields
   file: string;
   category?: string;
@@ -72,18 +72,39 @@ const SkeletonCard = () => (
   </div>
 );
 
-const ContentCard = ({ item, type, onClick }: { item: ContentItem; type: 'news' | 'article'; onClick?: () => void }) => {
-  const imageUrl = item.file || '/assets/img/placeholder.svg';
-  const title = type === 'news' ? item.cbtitl : item.cetitl;
-  const author = type === 'news' ? item.cbchid : item.cechid;
-  const dateStr = type === 'news' ? item.cbpsdt : item.cepsdt;
+const ContentCard = ({
+  item,
+  type,
+  onClick,
+}: {
+  item: ContentItem;
+  type: "news" | "article";
+  onClick?: () => void;
+}) => {
+  const imageUrl = item.file || "/assets/img/placeholder.svg";
+  const title = type === "news" ? item.cbtitl : item.cetitl;
+  const author = type === "news" ? item.cbchid : item.cechid;
+  const dateStr = type === "news" ? item.cbpsdt : item.cepsdt;
 
   const formatDate = (dateStr?: string) => {
-    if (!dateStr || dateStr.length !== 8) return 'No Date';
+    if (!dateStr || dateStr.length !== 8) return "No Date";
     const year = dateStr.substring(0, 4);
     const month = dateStr.substring(4, 6);
     const day = dateStr.substring(6, 8);
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
     return `${day} ${monthNames[parseInt(month) - 1]} ${year}`;
   };
 
@@ -91,10 +112,10 @@ const ContentCard = ({ item, type, onClick }: { item: ContentItem; type: 'news' 
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col sm:flex-row group">
       {/* Image Section - Left */}
       <div className="relative w-full sm:w-56 lg:w-64 h-48 sm:h-40 flex-shrink-0 overflow-hidden bg-gray-200">
-        <img 
-          src={imageUrl} 
-          alt={title} 
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
+        <img
+          src={imageUrl}
+          alt={title}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
       </div>
 
@@ -117,7 +138,7 @@ const ContentCard = ({ item, type, onClick }: { item: ContentItem; type: 'news' 
             {/* Author and Date */}
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-3">
               <div className="flex items-center gap-2 text-gray-600 text-sm">
-                <span className="font-medium">By "{author || 'Admin'}"</span>
+                <span className="font-medium">By "{author || "Admin"}"</span>
               </div>
               <div className="text-gray-500 text-sm whitespace-nowrap">
                 {formatDate(dateStr)}
@@ -130,13 +151,18 @@ const ContentCard = ({ item, type, onClick }: { item: ContentItem; type: 'news' 
               className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary/80 transition-colors group/btn text-sm"
             >
               <span>Baca Selengkapnya</span>
-              <svg 
-                className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-1" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-1"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
               </svg>
             </button>
           </div>
@@ -150,9 +176,9 @@ const MoreContentPage = () => {
   const { type } = useParams<{ type: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  
-  const searchQuery = searchParams.get('search') || '';
-  const categoryQuery = searchParams.get('category') || '';
+
+  const searchQuery = searchParams.get("search") || "";
+  const categoryQuery = searchParams.get("category") || "";
 
   const [query, setQuery] = useState(searchQuery);
   const [selectedCategory, setSelectedCategory] = useState(categoryQuery);
@@ -172,19 +198,22 @@ const MoreContentPage = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const lastContentElementRef = useRef<HTMLDivElement | null>(null);
 
-  const contentType: 'news' | 'article' = type === 'artikel' ? 'article' : 'news';
-  const pageTitle = contentType === 'news' ? 'List Berita & Aktifitas' : 'List Artikel';
+  const contentType: "news" | "article" =
+    type === "artikel" ? "article" : "news";
+  const pageTitle =
+    contentType === "news" ? "List Berita & Aktifitas" : "List Artikel";
 
   // Fetch categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const data = contentType === 'news' 
-          ? await API.getNewsCategories() 
-          : await API.getArticleCategories();
+        const data =
+          contentType === "news"
+            ? await API.getNewsCategories()
+            : await API.getArticleCategories();
         setCategories(data);
       } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error("Error fetching categories:", error);
         setCategories([]);
       }
     };
@@ -196,37 +225,42 @@ const MoreContentPage = () => {
     const fetchContent = async () => {
       setLoading(true);
       try {
-        const data = contentType === 'news' 
-          ? await API.getListNews() 
-          : await API.getListArtikel();
-        
+        const data =
+          contentType === "news"
+            ? await API.getListNews()
+            : await API.getListArtikel();
+
         let filteredData = data;
 
         // Filter by category
         if (selectedCategory) {
-          filteredData = filteredData.filter((item: ContentItem) => 
-            item.category === selectedCategory
+          filteredData = filteredData.filter(
+            (item: ContentItem) => item.category === selectedCategory
           );
         }
 
         // Filter by search query (gunakan debouncedQuery)
         if (debouncedQuery.trim()) {
           filteredData = filteredData.filter((item: ContentItem) => {
-            const title = contentType === 'news' ? item.cbtitl : item.cetitl;
-            const desc = contentType === 'news' ? item.cbdesc : item.cedesc;
-            return title?.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
-                   desc?.toLowerCase().includes(debouncedQuery.toLowerCase());
+            const title = contentType === "news" ? item.cbtitl : item.cetitl;
+            const desc = contentType === "news" ? item.cbdesc : item.cedesc;
+            return (
+              title?.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+              desc?.toLowerCase().includes(debouncedQuery.toLowerCase())
+            );
           });
         }
 
         // Sort by date descending
         filteredData = filteredData.sort((a: ContentItem, b: ContentItem) => {
-          const dateA = contentType === 'news' 
-            ? new Date(a.cbcsdt || a['cbcsdt::bpchar'] || 0).getTime()
-            : new Date(a.cecsdt || a['cecsdt::bpchar'] || 0).getTime();
-          const dateB = contentType === 'news'
-            ? new Date(b.cbcsdt || b['cbcsdt::bpchar'] || 0).getTime()
-            : new Date(b.cecsdt || b['cecsdt::bpchar'] || 0).getTime();
+          const dateA =
+            contentType === "news"
+              ? new Date(a.cbcsdt || a["cbcsdt::bpchar"] || 0).getTime()
+              : new Date(a.cecsdt || a["cecsdt::bpchar"] || 0).getTime();
+          const dateB =
+            contentType === "news"
+              ? new Date(b.cbcsdt || b["cbcsdt::bpchar"] || 0).getTime()
+              : new Date(b.cecsdt || b["cecsdt::bpchar"] || 0).getTime();
           return dateB - dateA;
         });
 
@@ -238,7 +272,7 @@ const MoreContentPage = () => {
         setDisplayedContent(firstBatch);
         setHasMore(filteredData.length > ITEMS_PER_PAGE);
       } catch (error) {
-        console.error('Error fetching content:', error);
+        console.error("Error fetching content:", error);
         setAllContent([]);
         setDisplayedContent([]);
       } finally {
@@ -278,10 +312,10 @@ const MoreContentPage = () => {
   useEffect(() => {
     const params = new URLSearchParams();
     if (debouncedQuery.trim()) {
-      params.set('search', debouncedQuery);
+      params.set("search", debouncedQuery);
     }
     if (selectedCategory) {
-      params.set('category', selectedCategory);
+      params.set("category", selectedCategory);
     }
     // Gunakan 'replace: true' agar tidak memenuhi history browser
     setSearchParams(params, { replace: true });
@@ -321,7 +355,7 @@ const MoreContentPage = () => {
 
   // Handle card click
   const handleCardClick = (item: ContentItem) => {
-    const id = contentType === 'news' ? item.cbcbnoiy : item.cecenoiy;
+    const id = contentType === "news" ? item.cbcbnoiy : item.cecenoiy;
     navigate(`/berita/${type}/detail/${id}`);
   };
 
@@ -340,16 +374,23 @@ const MoreContentPage = () => {
           </div>
         </div>
         <div className="absolute inset-0">
-          <img src="/assets/img/item/bg-1.png" alt="Background" className="w-full h-full object-cover opacity-90" />
+          <img
+            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-1.png`}
+            alt="Background"
+            className="w-full h-full object-cover opacity-90"
+          />
         </div>
         <div className="absolute bottom-0 right-12 mr-10 transform translate-x-1/4 translate-y-1/4">
-          <img src="/assets/img/item/icon-7.png" alt="Icon" className="w-36 sm:w-36 md:w-48 object-contain" />
+          <img
+            src={`${import.meta.env.BASE_URL}/assets/img/item/icon-7.png`}
+            alt="Icon"
+            className="w-36 sm:w-36 md:w-48 object-contain"
+          />
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
-        
 
         {/* Search & Filter */}
         <div className="mb-8">
@@ -358,7 +399,9 @@ const MoreContentPage = () => {
             <div className="flex-1 w-full">
               <input
                 type="text"
-                placeholder={`Cari ${contentType === 'news' ? 'berita' : 'artikel'}...`}
+                placeholder={`Cari ${
+                  contentType === "news" ? "berita" : "artikel"
+                }...`}
                 value={query} // <-- Nilai tetap 'query' agar instan
                 onChange={(e) => handleSearch(e.target.value)} // <-- Panggil handleSearch
                 className="w-full border rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -384,14 +427,26 @@ const MoreContentPage = () => {
         </div>
 
         <div className="mb-6">
-          <button 
+          <button
             onClick={handleBack}
             className="inline-flex items-center gap-2 px-4 py-2 text-primary hover:text-primary/80 transition-colors duration-200 group"
           >
-            <svg className="w-5 h-5 transition-transform duration-200 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            <svg
+              className="w-5 h-5 transition-transform duration-200 group-hover:-translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
             </svg>
-            <span className="font-medium">Kembali ke {contentType === 'news' ? 'Berita' : 'Artikel'}</span>
+            <span className="font-medium">
+              Kembali ke {contentType === "news" ? "Berita" : "Artikel"}
+            </span>
           </button>
         </div>
 
@@ -414,12 +469,23 @@ const MoreContentPage = () => {
         ) : displayedContent.length === 0 ? (
           <div className="text-center py-12">
             <div className="w-24 h-24 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
-              <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+              <svg
+                className="w-12 h-12 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                />
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              Tidak ada {contentType === 'news' ? 'berita' : 'artikel'} ditemukan
+              Tidak ada {contentType === "news" ? "berita" : "artikel"}{" "}
+              ditemukan
             </h3>
             <p className="text-gray-600">
               Coba ubah kata kunci pencarian atau filter kategori
@@ -429,11 +495,15 @@ const MoreContentPage = () => {
           <div className="space-y-6">
             {displayedContent.map((item, index) => (
               <div
-                key={contentType === 'news' ? item.cbcbnoiy : item.cecenoiy}
-                ref={index === displayedContent.length - 1 ? lastContentElementRef : null}
+                key={contentType === "news" ? item.cbcbnoiy : item.cecenoiy}
+                ref={
+                  index === displayedContent.length - 1
+                    ? lastContentElementRef
+                    : null
+                }
               >
-                <ContentCard 
-                  item={item} 
+                <ContentCard
+                  item={item}
                   type={contentType}
                   onClick={() => handleCardClick(item)}
                 />
@@ -448,7 +518,8 @@ const MoreContentPage = () => {
             <div className="flex items-center gap-3 bg-white px-6 py-3 rounded-lg shadow-sm">
               <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
               <span className="text-gray-600 font-medium">
-                Memuat {contentType === 'news' ? 'berita' : 'artikel'} lainnya...
+                Memuat {contentType === "news" ? "berita" : "artikel"}{" "}
+                lainnya...
               </span>
             </div>
           </div>
@@ -459,7 +530,8 @@ const MoreContentPage = () => {
           <div className="flex justify-center py-8">
             <div className="bg-white px-6 py-3 rounded-lg shadow-sm">
               <span className="text-gray-500">
-                Semua {contentType === 'news' ? 'berita' : 'artikel'} telah dimuat
+                Semua {contentType === "news" ? "berita" : "artikel"} telah
+                dimuat
               </span>
             </div>
           </div>
