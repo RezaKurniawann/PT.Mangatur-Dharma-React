@@ -24,20 +24,18 @@ const OurCategory = () => {
             <div className="h-64 rounded-lg overflow-hidden flex justify-center items-center">
               <img src=".\assets\img\item\category\ktgr1.png" alt="" className="max-w-full max-h-full object-contain" />
             </div>
-            <h3 className="font-bold text-2xl text-center">Automotive</h3>
+            <h3 className="font-bold text-2xl text-center">Atomotif</h3>
             <p className="text-center mt-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae architecto esse ab? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolorem debitis velit sed architecto quisquam dolor molestiae voluptas doloribus
-              similique.
+              Kami menyediakan filtrasi yang dirancang khusus dari Kendaraan sedan, kendaraan penumpang, hingga kendaraan komersial. Filter kami membantu menjaga komponen mesin tetap bersih, sehingga usia mesin, dan memberikan performa mesin yang optimal selama berkendara.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
             <div className="h-64 rounded-lg overflow-hidden flex justify-center items-center">
               <img src=".\assets\img\item\category\ktgr2.png" alt="" className="max-w-full max-h-full object-contain" />
             </div>
-            <h3 className="font-bold text-2xl text-center">Heavy Duty</h3>
+            <h3 className="font-bold text-2xl text-center">Alat Berat</h3>
             <p className="text-center mt-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae architecto esse ab? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolorem debitis velit sed architecto quisquam dolor molestiae voluptas doloribus
-              similique.
+              Solusi Filtrasi untuk Kendaraan Berat & Mesin Berkinerja Tinggi, mencakup berbagai jenis filter yang dirancang khusus untuk mesin dengan beban kerja berat, seperti alat berat konstruksi, truk tambang, kendaraan militer, peralatan agrikultur dan lainnya. Produk kami menjamin perlindungan maksimal terhadap kontaminasi yang dapat merusak sistem vital mesin Anda.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
@@ -46,18 +44,16 @@ const OurCategory = () => {
             </div>
             <h3 className="font-bold text-2xl text-center">Industrial</h3>
             <p className="text-center mt-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae architecto esse ab? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolorem debitis velit sed architecto quisquam dolor molestiae voluptas doloribus
-              similique.
+              Kami juga memiliki filtrasi untuk sistem Industri yang dirancang untuk kebutuhan pabrik, manufaktur, pembangkit listrik, fasilitas pengolahan dan lainnya. Filter kami membantu menjaga kualitas operasional mesin dan sistem agar tetap efisien, minim gangguan, dan memperpanjang umur peralatan industri.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
             <div className="h-64 rounded-lg overflow-hidden flex justify-center items-center">
               <img src=".\assets\img\item\category\ktgr4.png" alt="" className="max-w-full max-h-full object-contain" />
             </div>
-            <h3 className="font-bold text-2xl text-center">HVAC</h3>
+            <h3 className="font-bold text-2xl text-center">Sistem Tata Udara</h3>
             <p className="text-center mt-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae architecto esse ab? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolorem debitis velit sed architecto quisquam dolor molestiae voluptas doloribus
-              similique.
+              Solusi untuk Filter udara berkualitas untuk Sistem Tata Udara (HVAC) yang bersih dan sehat. Filter HVAC kami menyediakan berbagai produk yang dirancang untuk menjaga kualitas udara dalam gedung komersial, rumah sakit, F&B, dan fasilitas lain yang membutuhkan pengendalian udara bersih dan Sehat. Filter kami membantu mengurangi polutan, debu, bau, dan mikroorganisme sehingga menciptakan lingkungan yang lebih sehat.
             </p>
           </div>
         </div>

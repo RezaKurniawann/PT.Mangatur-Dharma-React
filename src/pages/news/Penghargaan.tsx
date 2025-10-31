@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout';
 import React, { useState, useEffect } from 'react';
 import { getListAwards } from '@/lib/awards.api';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Search, Calendar } from 'lucide-react';
 
 interface AwardDetail {
   dwpinoiy: number;
@@ -13,6 +13,7 @@ interface AwardDetail {
 interface Award {
   cwtitl: string;
   cwdesc: string;
+  cwdate: string;
   file: string;
   detail: AwardDetail[];
 }
@@ -23,6 +24,13 @@ const Penghargaan = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentImages, setCurrentImages] = useState<string[]>([]);
+  
+  // Filter states
+  const [searchTerm, setSearchTerm] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const startDateInputRef = React.useRef<HTMLInputElement>(null);
+  const endDateInputRef = React.useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchAwards = async () => {
@@ -30,9 +38,8 @@ const Penghargaan = () => {
       try {
         const data = await getListAwards();
         const sortedData = data.sort((a: any, b: any) => {
-          const dateA = new Date(a.cwcsdt || a['cwcsdt::bpchar']).getTime();
-          const dateB = new Date(b.cwcsdt || b['cwcsdt::bpchar']).getTime();
-          return dateB - dateA; 
+          // Sort by cwdate (format: YYYYMMDD) descending (terbaru dulu)
+          return parseInt(b.cwdate) - parseInt(a.cwdate);
         });
         setAwards(sortedData);
       } catch (error) {
@@ -43,6 +50,62 @@ const Penghargaan = () => {
 
     fetchAwards();
   }, []);
+
+  // Format cwdate (YYYYMMDD) to "27 Okt 2025"
+  const formatDateDisplay = (dateStr: string): string => {
+    if (!dateStr || dateStr.length !== 8) return '';
+    
+    const year = dateStr.substring(0, 4);
+    const month = dateStr.substring(4, 6);
+    const day = dateStr.substring(6, 8);
+    
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+    const monthIndex = parseInt(month) - 1;
+    
+    return `${parseInt(day)} ${monthNames[monthIndex]} ${year}`;
+  };
+
+  // Convert date input (YYYY-MM-DD) to cwdate format (YYYYMMDD)
+  const convertToDateFormat = (dateInput: string): string => {
+    if (!dateInput) return '';
+    return dateInput.replace(/-/g, '');
+  };
+
+  // Handle date selection from hidden input
+  const handleStartDateSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value) {
+      const formatted = convertToDateFormat(value);
+      setStartDate(formatted);
+    }
+  };
+
+  const handleEndDateSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value) {
+      const formatted = convertToDateFormat(value);
+      setEndDate(formatted);
+    }
+  };
+
+  // Filter awards
+  const filteredAwards = awards.filter(award => {
+    // Search filter
+    const matchesSearch = award.cwtitl.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         award.cwdesc.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    // Date range filter
+    let matchesDateRange = true;
+    if (startDate || endDate) {
+      const awardDate = parseInt(award.cwdate);
+      const start = startDate ? parseInt(startDate) : 0;
+      const end = endDate ? parseInt(endDate) : 99999999;
+      
+      matchesDateRange = awardDate >= start && awardDate <= end;
+    }
+    
+    return matchesSearch && matchesDateRange;
+  });
 
   const getAllImages = (award: Award): string[] => {
     const images = [award.file];
@@ -82,6 +145,12 @@ const Penghargaan = () => {
     setSelectedImage(currentImages[newIndex]);
   };
 
+  const resetFilters = () => {
+    setSearchTerm('');
+    setStartDate('');
+    setEndDate('');
+  };
+
   const AwardCard = ({ award, index }: { award: Award; index: number }) => {
     const allImages = getAllImages(award);
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -96,7 +165,6 @@ const Penghargaan = () => {
       e.stopPropagation();
       setCurrentSlide(prev => prev < allImages.length - 1 ? prev + 1 : 0);
     };
-
 
     const isDescriptionLong = award.cwdesc && award.cwdesc.length > 100;
 
@@ -114,7 +182,6 @@ const Penghargaan = () => {
             onClick={() => openImagePreview(allImages, currentSlide)}
           />
           
-          {/* Navigation Arrows - Only show if multiple images */}
           {allImages.length > 1 && (
             <>
               <button
@@ -133,7 +200,6 @@ const Penghargaan = () => {
                 <ChevronRight className="w-5 h-5" />
               </button>
 
-              {/* Dots Indicator */}
               <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
                 {allImages.map((_, idx) => (
                   <button
@@ -154,7 +220,6 @@ const Penghargaan = () => {
             </>
           )}
 
-          {/* Image Counter */}
           {allImages.length > 1 && (
             <div className="absolute top-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded-full z-10">
               {currentSlide + 1} / {allImages.length}
@@ -166,7 +231,8 @@ const Penghargaan = () => {
         <h3 className="font-bold text-xl text-center mt-4 text-gray-800">
           {award.cwtitl}
         </h3>
-        <div className="relative">
+
+        <div className="relative mt-2">
           <p 
             className={`text-center mt-2 text-gray-600 text-sm line-clamp-3 ${
               isDescriptionLong ? 'cursor-help' : ''
@@ -177,13 +243,11 @@ const Penghargaan = () => {
             {award.cwdesc}
           </p>
           
-          {/* Tooltip for full description */}
           {showDescriptionTooltip && isDescriptionLong && (
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-80 max-w-[90vw] bg-gray-900 text-white text-sm rounded-lg p-4 shadow-xl z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
               <div className="max-h-60 overflow-y-auto">
                 {award.cwdesc}
               </div>
-              {/* Arrow */}
               <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1">
                 <div className="border-8 border-transparent border-t-gray-900"></div>
               </div>
@@ -200,7 +264,7 @@ const Penghargaan = () => {
       <div className="relative bg-gradient-to-r from-primary to-primary/90 text-white py-10 md:py-18">
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl md:text-5xl font-bold z-50">Our Awards</h1>
+            <h1 className="text-3xl md:text-5xl font-bold z-50">Penghargaan</h1>
           </div>
         </div>
         <div className="absolute inset-0">
@@ -220,18 +284,131 @@ const Penghargaan = () => {
       </div>
 
       {/* Section Title */}
-      <div className="container mx-auto px-4">
-        <div className="bg-white p-8 my-7 shadow-lg rounded-lg">
-          <div className="flex items-center">
-            <div className="bg-primary h-12 w-1 mr-4"></div>
-            <h2 className="text-2xl font-bold text-gray-800">Semua Penghargaan</h2>
-            <div className="flex-grow border-t-4 border-gray-700 ml-4"></div>
+      <div className="container mx-auto px-4 py-10">
+        <div className="flex items-center">
+          <div className="bg-primary h-12 w-1 mr-4"></div>
+          <h2 className="text-2xl font-bold text-gray-800">Semua Penghargaan</h2>
+          <div className="flex-grow border-t-4 border-gray-700 ml-4"></div>
+        </div>
+      </div>
+
+      {/* Filter Section */}
+      <div className="container mx-auto px-4 pb-8">
+        <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Search Input */}
+            <div className="relative">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Cari Penghargaan
+              </label>
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Cari judul atau deskripsi..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Start Date */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Tanggal Awal
+              </label>
+              <div className="relative">
+                <input
+                  ref={startDateInputRef}
+                  type="date"
+                  onChange={handleStartDateSelect}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-datetime-edit]:opacity-0"
+                />
+                {startDate ? (
+                  <div className="absolute inset-0 flex items-center px-4 pointer-events-none">
+                    <span className="text-gray-900">{formatDateDisplay(startDate)}</span>
+                  </div>
+                ) : (
+                  <div className="absolute inset-0 flex items-center px-4 pointer-events-none">
+                    <span className="text-gray-400">Pilih tanggal awal</span>
+                  </div>
+                )}
+                {startDate && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setStartDate('');
+                      if (startDateInputRef.current) {
+                        startDateInputRef.current.value = '';
+                      }
+                    }}
+                    className="absolute right-10 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 z-10"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* End Date */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Tanggal Akhir
+              </label>
+              <div className="relative">
+                <input
+                  ref={endDateInputRef}
+                  type="date"
+                  onChange={handleEndDateSelect}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-datetime-edit]:opacity-0"
+                />
+                {endDate ? (
+                  <div className="absolute inset-0 flex items-center px-4 pointer-events-none">
+                    <span className="text-gray-900">{formatDateDisplay(endDate)}</span>
+                  </div>
+                ) : (
+                  <div className="absolute inset-0 flex items-center px-4 pointer-events-none">
+                    <span className="text-gray-400">Pilih tanggal akhir</span>
+                  </div>
+                )}
+                {endDate && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setEndDate('');
+                      if (endDateInputRef.current) {
+                        endDateInputRef.current.value = '';
+                      }
+                    }}
+                    className="absolute right-10 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 z-10"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Filter Actions */}
+          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+            <div className="text-sm text-gray-600">
+              Menampilkan <span className="font-semibold text-primary">{filteredAwards.length}</span> dari <span className="font-semibold">{awards.length}</span> penghargaan
+            </div>
+            {(searchTerm || startDate || endDate) && (
+              <button
+                onClick={resetFilters}
+                className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+              >
+                Reset Filter
+              </button>
+            )}
           </div>
         </div>
       </div>
 
       {/* Awards Grid */}
-      <div className="container mx-auto px-4 py-8 pb-16">
+      <div className="container mx-auto px-4 pb-16">
         {loading ? (
           <div className="flex justify-center items-center py-20">
             <div className="text-center">
@@ -239,15 +416,31 @@ const Penghargaan = () => {
               <p className="mt-4 text-gray-600">Memuat data penghargaan...</p>
             </div>
           </div>
-        ) : awards.length > 0 ? (
+        ) : filteredAwards.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {awards.map((award, index) => (
+            {filteredAwards.map((award, index) => (
               <AwardCard key={index} award={award} index={index} />
             ))}
           </div>
         ) : (
           <div className="text-center py-20">
-            <p className="text-gray-500 text-lg">Tidak ada data penghargaan yang ditemukan.</p>
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-200 mb-4">
+              <Search className="w-10 h-10 text-gray-400" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-700 mb-2">
+              Tidak Ada Hasil
+            </h3>
+            <p className="text-gray-500 mb-4">
+              Tidak ada penghargaan yang sesuai dengan filter Anda.
+            </p>
+            {(searchTerm || startDate || endDate) && (
+              <button
+                onClick={resetFilters}
+                className="text-primary hover:text-primary/80 font-medium transition-colors"
+              >
+                Reset Filter
+              </button>
+            )}
           </div>
         )}
       </div>
@@ -258,7 +451,6 @@ const Penghargaan = () => {
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
           onClick={closeImagePreview}
         >
-          {/* Close Button */}
           <button
             onClick={closeImagePreview}
             className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-50"
@@ -267,7 +459,6 @@ const Penghargaan = () => {
             <X className="w-8 h-8" />
           </button>
 
-          {/* Navigation Arrows */}
           {currentImages.length > 1 && (
             <>
               <button
@@ -288,7 +479,6 @@ const Penghargaan = () => {
             </>
           )}
 
-          {/* Image */}
           <div className="max-w-6xl max-h-[90vh] flex items-center justify-center">
             <img 
               src={selectedImage} 
@@ -298,7 +488,6 @@ const Penghargaan = () => {
             />
           </div>
 
-          {/* Image Counter */}
           {currentImages.length > 1 && (
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm z-50">
               {currentImageIndex + 1} / {currentImages.length}

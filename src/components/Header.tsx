@@ -177,7 +177,7 @@ const Header = () => {
                   Penghargaan
                 </Link>
                 <Link to="/berita/aktifitas" className="block px-4 py-2 text-gray-700 hover:bg-secondary hover:text-primary transition-colors" onClick={() => setActiveDropdown(null)}>
-                  Aktifitas
+                  Berita & Aktifitas
                 </Link>
                 <Link to="/berita/artikel" className="block px-4 py-2 text-gray-700 hover:bg-secondary hover:text-primary transition-colors" onClick={() => setActiveDropdown(null)}>
                   Artikel

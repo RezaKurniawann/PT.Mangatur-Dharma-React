@@ -108,14 +108,14 @@ const DaftarPelanggan = () => {
 
       {/* CONTENT AREA */}
       <div className="min-h-screen py-12">
-        <div className="container mx-auto px-4">
+        <div className="flex flex-col items-center w-full px-4">
           {loading ? (
             // Loading Skeleton
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="flex flex-wrap justify-center gap-6 w-full max-w-7xl">
               {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
                 <div
                   key={i}
-                  className="bg-white rounded-lg shadow-md p-6 animate-pulse"
+                  className="bg-white rounded-lg shadow-md p-6 animate-pulse w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
                 >
                   <div className="aspect-[16/10] bg-gray-200 rounded mb-4"></div>
                   <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
@@ -124,11 +124,11 @@ const DaftarPelanggan = () => {
             </div>
           ) : filteredCustomers.length > 0 ? (
             // Customer Grid
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="flex flex-wrap justify-center gap-6 w-full max-w-7xl">
               {filteredCustomers.map((customer, index) => (
                 <div
                   key={`${customer.cachno}-${index}`}
-                  className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group"
+                  className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
                 >
                   <div className="aspect-[16/10] relative overflow-hidden bg-white flex items-center justify-center p-6">
                     <img

@@ -29,8 +29,7 @@ const VisiMisi = () => {
           <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow">
             <h2 className="text-2xl font-bold text-primary mb-6">Misi</h2>
             <p className="text-lg leading-relaxed text-gray-700">
-              Menjadi perusahaan pertama yang menyediakan solusi untuk kebutuhan Industri (Power Plan, Oil & Gas, Otomotif, Mining, Marine, HVAC) dengan menyediakan Produk berkualitas, harga yang terjangkau serta area distribusi yang luas &
-              terpercaya.
+              Menjadi perusahaan unggulan di Indonesia yang menghadirkan solusi bagi Industri (Pembangkit listrik, Migas, Otomotif, pertambangan, maritim dan sistem tata udara) dengan produk berkualitas, harga bersaing, serta distribusi yang luas dan terpercaya.
             </p>
           </div>
         </div>

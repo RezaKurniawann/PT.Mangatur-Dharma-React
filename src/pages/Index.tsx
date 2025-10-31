@@ -66,10 +66,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="container text-center mx-auto px-4 py-6 md:py-12">
             <p className="text-lg leading-relaxed text-gray-700">
-              Kami menyediakan solusi komprehensif untuk semua kebutuhan filter Anda di berbagai industri. Baik Anda berada di sektor pertambangan, konstruksi, transportasi, pembangkit listrik, atau manufaktur, kami memiliki filter
-              berkualitas tinggi yang memastikan kinerja optimal mesin dan peralatan Anda. Produk kami dibuat dengan standar internasional yang ketat, menggunakan bahan terbaik dan teknologi terdepan untuk memastikan ketahanan, efisiensi,
-              dan keandalan yang luar biasa. Dengan produk berkualitas tinggi, manfaat dari filter terkualitas tinggi yang kami tawarkan, mulai dari filter berkualitas tinggi, memastikan efektivitas harga. Apapun industrinya, kami
-              menyediakan solusi filter yang tepat untuk Anda dengan kualitas terbaik yang terjangkau.
+              PT Mangatur Dharma merupakan perusahaan yang bergerak di bidang penyediaan solusi filtrasi untuk berbagai kebutuhan industri. Kami berkomitmen untuk menyediakan produk filter dengan kualitas tinggi yang dirancang untuk menjaga kinerja sistem dan mesin agar tetap optimal, efisien, serta tahan lama. Kami melayani berbagai sektor industri strategis, termasuk pembangkit listrik, minyak dan gas (migas), otomotif, pertambangan, maritim, serta sistem tata udara (HVAC). Dengan mengutamakan penggunaan komponen lokal yang berkualitas dan proses produksi yang terstandarisasi, produk kami telah terbukti mampu memenuhi tuntutan teknis yang tinggi dan kebutuhan operasional yang kompleks.
             </p>
           </div>
         </div>
