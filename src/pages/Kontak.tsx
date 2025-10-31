@@ -10,10 +10,10 @@ const Kontak = () => {
           </div>
         </div>
         <div className="absolute inset-0">
-          <img src="\assets\img\item\bg-1.png" alt="Modern office building" className="w-full h-full object-cover opacity-90" />
+          <img src={`${import.meta.env.BASE_URL}/assets/img/item/bg-1.png`} alt="Modern office building" className="w-full h-full object-cover opacity-90" />
         </div>
         <div className="absolute bottom-0 right-12 mr-10 transform translate-x-1/4 translate-y-1/4">
-          <img src="\assets\img\item\icon-4.png" alt="About Us" className="w-36 sm:w-36 md:w-48 object-contain animate-leftright" />
+          <img src={`${import.meta.env.BASE_URL}/assets/img/item/icon-4.png`} alt="About Us" className="w-36 sm:w-36 md:w-48 object-contain animate-leftright" />
         </div>
       </div>
 
@@ -69,19 +69,19 @@ const Kontak = () => {
             <div className="space-y-6">
               <div>
                 <li className="flex items-center mb-2">
-                  <img src="\assets\img\item\icon-email.png" alt="Facebook Icon" className="h-6 w-7 text-primary mr-3 ml-1" />
+                  <img src={`${import.meta.env.BASE_URL}/assets/img/item/icon-email.png`} alt="Facebook Icon" className="h-6 w-7 text-primary mr-3 ml-1" />
                   <a href="mailto:mangatur@adr-group.com" className="text-gray-600 hover:underline">
                     mangatur@adr-group.com
                   </a>
                 </li>
                 <li className="flex items-center  mb-2 mt-2">
-                  <img src="\assets\img\item\icon-ig.png" alt="Facebook Icon" className="h-6 w-6 text-primary mr-4 ml-1" />
+                  <img src={`${import.meta.env.BASE_URL}/assets/img/item/icon-ig.png`} alt="Facebook Icon" className="h-6 w-6 text-primary mr-4 ml-1" />
                   <a href="https://www.instagram.com/mangaturdharma" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:underline">
                     @mangaturdharma
                   </a>
                 </li>
                 <li className="flex items-center mt-2">
-                  <img src="\assets\img\item\icon-fb.png" alt="Facebook Icon" className="h-6 w-3 text-primary mr-7 ml-2" />
+                  <img src={`${import.meta.env.BASE_URL}/assets/img/item/icon-fb.png`} alt="Facebook Icon" className="h-6 w-3 text-primary mr-7 ml-2" />
                   <a href="https://www.facebook.com/MangaturDharma" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:underline">
                     PT Mangatur Dharma
                   </a>

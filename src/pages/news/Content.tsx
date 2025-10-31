@@ -176,7 +176,9 @@ const OtherCard = ({
   type: "news" | "article";
   onClick?: () => void;
 }) => {
-  const imageUrl = item.file || "/assets/img/placeholder.svg";
+ const imageUrl = item.file 
+  ? item.file 
+  : `${import.meta.env.BASE_URL}assets/img/placeholder.svg`;
   const title = type === "news" ? item.cbtitl : item.cetitl;
   const author = type === "news" ? item.cbchid : item.cechid;
   const dateStr = type === "news" ? item.cbpsdt : item.cepsdt;
@@ -321,13 +323,11 @@ const ContentPage = () => {
     fetchContent();
   }, [contentType, selectedCategory, debouncedQuery]);
 
-  // Handle card click to navigate to detail page
   const handleCardClick = (item: ContentItem) => {
     const id = contentType === "news" ? item.cbcbnoiy : item.cecenoiy;
     navigate(`/berita/${type}/detail/${id}`);
   };
 
-  // --- Handle search - hanya update state ---
   const handleSearch = (value: string) => {
     setQuery(value);
     setIsSearching(true);
@@ -375,7 +375,6 @@ const ContentPage = () => {
     navigate(`/berita/${type}/more${queryString ? `?${queryString}` : ""}`);
   };
 
-  // Split content: 8 for latest, rest for other
   const latestContent = contentData.slice(0, 8);
   const latestBigContent = latestContent.slice(0, 4);
   const latestSmallContent = latestContent.slice(4, 8);
@@ -418,7 +417,7 @@ const ContentPage = () => {
                   contentType === "news" ? "berita" : "artikel"
                 }...`}
                 value={query}
-                onChange={(e) => handleSearch(e.target.value)} // Tetap panggil handleSearch
+                onChange={(e) => handleSearch(e.target.value)} 
                 className="w-full border rounded-md px-4 py-2 pr-10 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
               />
               <div className="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary">
@@ -513,12 +512,11 @@ const ContentPage = () => {
             </div>
           )}
 
-          {/* Other Section - Sisa items setelah 8 terbaru */}
           {otherContent.length > 0 && (
             <div
               className="relative py-12 -mb-12"
               style={{
-                backgroundImage: "url(/assets/img/news/other-news-bg.png)",
+                backgroundImage: `url(${import.meta.env.BASE_URL}assets/img/news/other-news-bg.png)`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",

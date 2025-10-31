@@ -375,7 +375,7 @@ const ContentDetail = () => {
                   key={item.id}
                   className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                   onClick={() =>
-                    (window.location.href = `/berita/${type}/detail/${item.id}`)
+                    (window.location.href = `${import.meta.env.BASE_URL}/berita/${type}/detail/${item.id}`)
                   }
                 >
                   <div className="flex gap-3 p-3 flex-1">
