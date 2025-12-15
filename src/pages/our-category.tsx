@@ -13,13 +13,13 @@ const OurCategory = () => {
           <img src={`${import.meta.env.BASE_URL}/assets/img/item/bg-1.png`} alt="Modern office building" className="w-full h-full object-cover opacity-90" />
         </div>
         <div className="absolute bottom-0 right-12 mr-10 transform translate-x-1/4 translate-y-1/4">
-          <img src={`${import.meta.env.BASE_URL}/assets/img/item/icon-5.png`} alt="About Us" className="w-36 sm:w-36 md:w-48 object-contain animate-updown" />
+          <img src={`${import.meta.env.BASE_URL}/assets/img/item/icon-5.png`} alt="About Us" className="w-36 sm:w-36 md:w-48 md:h-[calc(15vh)] object-contain animate-updown" />
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-15 ">
         {/* Category Section */}
-        <div className="mt-12 grid md:grid-cols-4 gap-5">
+        <div className="mt-12 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
             <div className="h-64 rounded-lg overflow-hidden flex justify-center items-center">
               <img src={`${import.meta.env.BASE_URL}/assets/img/item/category/ktgr1.png`} alt="" className="max-w-full max-h-full object-contain" />
