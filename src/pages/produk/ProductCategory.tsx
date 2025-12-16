@@ -255,8 +255,8 @@ const ProductCategory = () => {
       </div>
 
       {/* Products Grid Section */}
-      <div className="container mx-auto px-4 py-10">
-        <h2 className="text-3xl font-bold text-center mb-10">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mt-10 mb-10">
           Our Related Product
         </h2>
 
@@ -357,17 +357,17 @@ const ProductCategory = () => {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="mt-12 flex flex-col items-center justify-center gap-4 px-4">
+              <div className="mt-12 flex flex-col justify-end gap-4 px-4">
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   {/* Previous Button - Hide on first page */}
-                  {currentPage > 1 && (
-                    <button
-                      onClick={handlePreviousPage}
-                      className="px-4 sm:px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm sm:text-base whitespace-nowrap"
-                    >
-                      Previous
-                    </button>
-                  )}
+
+                  <button
+                    onClick={handlePreviousPage}
+                    className="px-4 sm:px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm sm:text-base whitespace-nowrap disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400"
+                    disabled={!(currentPage > 1)}
+                  >
+                    Previous
+                  </button>
 
                   {/* Page Info */}
                   <span className="text-gray-600 font-medium text-sm sm:text-base whitespace-nowrap">
@@ -375,18 +375,42 @@ const ProductCategory = () => {
                   </span>
 
                   {/* Next Button - Hide on last page */}
-                  {currentPage < totalPages && (
+                  {/* {currentPage < totalPages && (
                     <button
                       onClick={handleNextPage}
                       className="px-4 sm:px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm sm:text-base whitespace-nowrap"
                     >
                       Next
                     </button>
-                  )}
+                  )} */}
+
+                  <button
+                    onClick={handleNextPage}
+                    className="px-4 sm:px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm sm:text-base whitespace-nowrap disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400"
+                    disabled={!(currentPage < totalPages)}
+                  >
+                    Next
+                  </button>
+                  {/* <input
+                    type="number"
+                    min="1"
+                    max={totalPages}
+                    value={goToPage}
+                    onChange={(e) => setGoToPage(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Go to page"
+                    className="w-24 sm:w-28 px-2 sm:px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
+                  /> */}
+                  {/* <button
+                    onClick={handleGoToPage}
+                    className="px-3 sm:px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium text-sm sm:text-base whitespace-nowrap"
+                  >
+                    Go
+                  </button> */}
                 </div>
 
                 {/* Go To Page Input - Separate row on mobile */}
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                   <input
                     type="number"
                     min="1"
@@ -403,7 +427,7 @@ const ProductCategory = () => {
                   >
                     Go
                   </button>
-                </div>
+                </div> */}
               </div>
             )}
           </>

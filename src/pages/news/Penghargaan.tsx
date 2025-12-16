@@ -294,7 +294,7 @@ const Penghargaan = () => {
           <img
             src={`${import.meta.env.BASE_URL}/assets/img/item/icon-6.png`}
             alt="Awards Icon"
-            className="w-36 sm:w-36 md:w-48 object-contain animate-leftright"
+            className="w-36 sm:w-36 md:w-48 md:h-[calc(15vh)] object-contain "
           />
         </div>
       </div>

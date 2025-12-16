@@ -23,7 +23,7 @@ const TentangPerusahaan = () => {
           <img
             src={`${import.meta.env.BASE_URL}/assets/img/item/icon-1.png`}
             alt="About Us"
-            className="w-36 sm:w-36 md:w-48 object-contain animate-updown"
+            className="w-36 sm:w-36 md:w-48 md:h-[calc(15vh)] object-contain animate-updown"
           />
         </div>
       </div>

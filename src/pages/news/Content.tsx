@@ -400,7 +400,7 @@ const ContentPage = () => {
           <img
             src={`${import.meta.env.BASE_URL}/assets/img/item/icon-7.png`}
             alt="Icon"
-            className="w-36 sm:w-36 md:w-48 object-contain"
+            className="w-36 sm:w-36 md:w-48 md:h-[calc(15vh)] object-contain"
           />
         </div>
       </div>
