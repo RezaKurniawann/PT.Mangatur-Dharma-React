@@ -4,9 +4,12 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import heroImage1 from '../assets/md1.png';
-import heroImage2 from '../assets/md2.png';
-import heroImage3 from '../assets/md3.png';
+import heroImage1 from '../assets/banner1.webp';
+import heroImage2 from '../assets/banner2.webp';
+import heroImage3 from '../assets/banner3.webp';
+// import heroImage1 from '../assets/md1.png';
+// import heroImage2 from '../assets/md2.png';
+// import heroImage3 from '../assets/md3.png';
 import { PrevArrow, NextArrow } from "@/components/CustomArrows";
 const settings = {
   dots: true,
@@ -58,7 +61,7 @@ const Index = () => {
                   src={image}
                   alt={`Industrial filter product ${index + 1}`}
                   className="w-full h-auto shadow-2xl object-cover"
-                  style={{ maxHeight: "500px" }}
+                  // style={{ maxHeight: "500px" }}
                 />
               </div>
             ))}
@@ -67,10 +70,10 @@ const Index = () => {
       </section>
 
       {/* Company Description */}
-      <section className="py-16 bg-white">
+      <section className="lg:py-8 bg-white">
         <div className="container mx-auto px-4">
           <div className="container text-center mx-auto px-4 py-6 md:py-12">
-            <p className="text-lg leading-relaxed text-gray-700">
+            <p className="text-sm md:text-base lg:text-lg leading-relaxed text-gray-700">
               PT Mangatur Dharma merupakan perusahaan yang bergerak di bidang
               penyediaan solusi filtrasi untuk berbagai kebutuhan industri. Kami
               berkomitmen untuk menyediakan produk filter dengan kualitas tinggi
