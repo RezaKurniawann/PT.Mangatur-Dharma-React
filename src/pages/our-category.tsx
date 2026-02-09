@@ -31,7 +31,7 @@ const OurCategory = () => {
           <div className="flex items-center justify-between">
             <h1 className="text-3xl md:text-5xl font-bold z-50">
               {" "}
-              Our Category
+              Area Bisnis
             </h1>
           </div>
         </div>
@@ -52,7 +52,7 @@ const OurCategory = () => {
       </div>
 
       <div className="container mx-auto px-4 py-15 ">
-        <div className="mt-12 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div className="mt-12 grid sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-5">
           {contents.map((item, idx) => (
             <div
               className="bg-white p-6 rounded-lg shadow-lg border border-gray-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-2"

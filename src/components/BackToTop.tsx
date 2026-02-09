@@ -1,6 +1,9 @@
-import { useState, useEffect } from 'react';
+import useLenis from "@/lib/lenis";
+import { useState, useEffect } from "react";
 
 const BackToTop = () => {
+  const lenis = useLenis();
+
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -12,18 +15,15 @@ const BackToTop = () => {
       }
     };
 
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility);
 
     return () => {
-      window.removeEventListener('scroll', toggleVisibility);
+      window.removeEventListener("scroll", toggleVisibility);
     };
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    lenis.scrollTo(0, { lerp: 0.1 });
   };
 
   return (

@@ -6,7 +6,7 @@ const JejakLangkah = () => {
       <div className="relative bg-gradient-to-r from-primary to-primary/90 text-white py-10 md:py-18">
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl md:text-5xl font-bold z-50">Jejak & Langkah</h1>
+            <h1 className="text-3xl md:text-5xl font-bold z-50">Jejak Langkah</h1>
           </div>
         </div>
         <div className="absolute inset-0">
@@ -57,7 +57,7 @@ const JejakLangkah = () => {
           <div className="bg-white p-6 rounded-lg shadow-md flex items-start space-x-4">
             <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">2004</div>
             <div>
-              <h4 className="text-xl font-semibold text-gray-800">Sole Agent PT</h4>
+              <h4 className="text-xl font-semibold text-gray-800">Sole Agent PT Panata Jaya Mandiri</h4>
               <p className="text-gray-600 mt-1">Menjadi Sole Agent PT Panata Jaya Mandiri untuk GTS & Filter</p>
             </div>
           </div>
@@ -65,7 +65,7 @@ const JejakLangkah = () => {
           <div className="bg-white p-6 rounded-lg shadow-md flex items-start space-x-4">
             <div className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">2021</div>
             <div>
-              <h4 className="text-xl font-semibold text-gray-800">Sole Agent PT</h4>
+              <h4 className="text-xl font-semibold text-gray-800">Sole Agent PT Selamat Sempurna</h4>
               <p className="text-gray-600 mt-1">Menjadi Sole Agent PT Selamat Sempurna untuk GTS, HVAC & Filter</p>
             </div>
           </div>

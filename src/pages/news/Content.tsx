@@ -375,9 +375,9 @@ const ContentPage = () => {
     navigate(`/berita/${type}/more${queryString ? `?${queryString}` : ""}`);
   };
 
-  const latestContent = contentData.slice(0, 8);
+  const latestContent = contentData.slice(0, 12);
   const latestBigContent = latestContent.slice(0, 4);
-  const latestSmallContent = latestContent.slice(4, 8);
+  const latestSmallContent = latestContent.slice(4, 12);
   const otherContent = contentData.slice(8);
 
   return (
@@ -486,7 +486,7 @@ const ContentPage = () => {
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* Left side - 4 big cards */}
-                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {latestBigContent.map((item, index) => (
                     <LatestBigCard
                       key={index}
@@ -498,7 +498,7 @@ const ContentPage = () => {
                 </div>
 
                 {/* Right side - 4 small cards */}
-                <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 grid-rows-1 sm:grid-rows-2 lg:grid-rows-4 gap-6">
+                <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 grid-rows-1 sm:grid-rows-3 lg:grid-rows-6 gap-4">
                   {latestSmallContent.map((item, index) => (
                     <LatestSmallCard
                       key={index}

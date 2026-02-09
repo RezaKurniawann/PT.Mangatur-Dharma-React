@@ -205,16 +205,26 @@ const ProductCategory = () => {
 
       {/* Description Section */}
       <div className="container mx-auto px-4 -mt-16 relative z-20">
-        <div className="grid md:grid-cols-2 gap-12 mt-5 items-center bg-white p-10 rounded-xl shadow-lg">
+        <div className="grid md:grid-cols-2 gap-12 mt-5 bg-white p-10 rounded-xl shadow-lg">
           <div className="relative w-full md:w-auto">
             <div className="font-bold text-xl mb-4">
               {featuredProduct ? featuredProduct.cdcdnm : category?.tssynm}
             </div>
             <p className="mt-5 text-gray-700 leading-relaxed">
               {featuredProduct && featuredProduct.cddesc ? (
-                featuredProduct.cddesc
+                <div
+                  className="prose max-w-none text-gray-700 leading-relaxed space-y-4 text-justify "
+                  dangerouslySetInnerHTML={{
+                    __html: featuredProduct.cddesc || "",
+                  }}
+                />
               ) : featuredProduct && featuredProduct.cdremk ? (
-                featuredProduct.cdremk
+                <div
+                  className="prose max-w-none text-gray-700 leading-relaxed space-y-4 text-justify"
+                  dangerouslySetInnerHTML={{
+                    __html: featuredProduct.cdremk || "",
+                  }}
+                />
               ) : (
                 <>
                   Kami menyediakan berbagai produk berkualitas tinggi dalam
@@ -233,13 +243,13 @@ const ProductCategory = () => {
               <img
                 src={featuredProduct.file}
                 alt={featuredProduct.cdcdnm}
-                className="w-full h-auto max-w-[300px] max-h-[300px] mx-auto object-contain"
+                className="w-full max-h-[500px] mx-auto aspect-square object-cover "
               />
             ) : products.length > 0 && products[0].file ? (
               <img
                 src={products[0].file}
                 alt={displayCategoryName || ""}
-                className="w-full h-auto max-w-[300px] max-h-[300px] mx-auto object-contain"
+                className="w-full max-h-[500px] mx-auto aspect-square object-cover "
               />
             ) : (
               <img
@@ -247,7 +257,7 @@ const ProductCategory = () => {
                   import.meta.env.BASE_URL
                 }/assets/img/produk/air-filter.png`}
                 alt="Product"
-                className="w-full h-auto max-w-[300px] max-h-[300px] mx-auto object-contain"
+                className="w-full max-h-[500px] mx-auto aspect-square object-cover "
               />
             )}
           </div>
@@ -297,7 +307,7 @@ const ProductCategory = () => {
                 >
                   {/* Default Content */}
                   <div
-                    className={`absolute inset-0 p-4 sm:p-6 flex flex-col sm:flex-row gap-3 sm:gap-4 transition-opacity duration-500 ${
+                    className={`absolute inset-0 px-4 py-2 sm:px-6 sm:py-2 flex flex-col sm:flex-row gap-3 sm:gap-4 transition-opacity duration-500 ${
                       hoveredIndex === index ? "opacity-0" : "opacity-100"
                     }`}
                   >
@@ -314,8 +324,8 @@ const ProductCategory = () => {
                         <img
                           src={product.file}
                           alt={product.cdcdnm}
-                          className="max-w-full max-h-full object-contain"
-                          style={{ maxHeight: "180px", maxWidth: "180px" }}
+                          className="w-full max-h-full aspect-square object-cover"
+                          // style={{ maxHeight: "180px", maxWidth: "180px" }}
                         />
                       ) : (
                         <div className="flex items-center justify-center text-gray-300">
@@ -346,9 +356,15 @@ const ProductCategory = () => {
                     }`}
                   >
                     <div className="text-xs sm:text-sm text-gray-700 leading-relaxed overflow-y-auto max-h-full">
-                      {product.cddesc ||
-                        product.cdremk ||
-                        "Tidak ada deskripsi tersedia untuk produk ini."}
+                      <div
+                        className="prose max-w-none text-gray-700 leading-relaxed space-y-4 text-justify"
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            product.cddesc ||
+                            product.cdremk ||
+                            "Tidak ada deskripsi tersedia untuk produk ini.",
+                        }}
+                      />
                     </div>
                   </div>
                 </div>

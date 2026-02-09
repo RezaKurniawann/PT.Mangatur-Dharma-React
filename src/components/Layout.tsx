@@ -4,6 +4,7 @@ import BackToTop from "./BackToTop";
 import "lenis/dist/lenis.css";
 import { useLenisStore } from "@/hooks/use-lenis-store";
 import ReactLenis from "lenis/react";
+import { ScrollToTop } from "./ScrollToTop";
 
 interface LayoutProps {
   children: ReactNode;
@@ -22,6 +23,7 @@ const Layout = ({ children }: LayoutProps) => {
             &copy; 2025 <b>PT Mangatur Dharma</b>
           </p>
         </footer>
+        <ScrollToTop />
         <BackToTop />
       </div>
     </ReactLenis>

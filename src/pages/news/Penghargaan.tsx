@@ -20,6 +20,7 @@ interface Award {
 
 const Penghargaan = () => {
   const [awards, setAwards] = useState<Award[]>([]);
+  const [filteredAwards, setFilteredAwards] = useState<Award[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -42,12 +43,12 @@ const Penghargaan = () => {
           return parseInt(b.cwdate) - parseInt(a.cwdate);
         });
         setAwards(sortedData);
+        setFilteredAwards(sortedData);
       } catch (error) {
         console.error("Gagal memuat data penghargaan:", error);
       }
       setLoading(false);
     };
-
     fetchAwards();
   }, []);
 
@@ -85,41 +86,58 @@ const Penghargaan = () => {
   };
 
   // Handle date selection from hidden input
-  const handleStartDateSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleStartDateSelect = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value;
-    if (value) {
-      const formatted = convertToDateFormat(value);
-      setStartDate(formatted);
-    }
+    if (!value) return;
+
+    const formatted = convertToDateFormat(value);
+    setStartDate(formatted);
+
+    const data = await getListAwards(formatted, endDate);
+
+    const sortedData = data.sort((a: any, b: any) => {
+      return parseInt(b.cwdate) - parseInt(a.cwdate);
+    });
+
+    setFilteredAwards(sortedData);
   };
 
-  const handleEndDateSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEndDateSelect = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value;
-    if (value) {
-      const formatted = convertToDateFormat(value);
-      setEndDate(formatted);
-    }
+    if (!value) return;
+
+    const formatted = convertToDateFormat(value);
+    setEndDate(formatted);
+
+    const data = await getListAwards(startDate, formatted);
+
+    const sortedData = data.sort((a: any, b: any) => {
+      return parseInt(b.cwdate) - parseInt(a.cwdate);
+    });
+
+    setFilteredAwards(sortedData);
   };
 
-  // Filter awards
-  const filteredAwards = awards.filter((award) => {
-    // Search filter
-    const matchesSearch =
-      award.cwtitl.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      award.cwdesc.toLowerCase().includes(searchTerm.toLowerCase());
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const keyword = searchTerm.toLowerCase();
 
-    // Date range filter
-    let matchesDateRange = true;
-    if (startDate || endDate) {
-      const awardDate = parseInt(award.cwdate);
-      const start = startDate ? parseInt(startDate) : 0;
-      const end = endDate ? parseInt(endDate) : 99999999;
+      const result = awards.filter((award) => {
+        return (
+          award.cwtitl.toLowerCase().includes(keyword) ||
+          award.cwdesc.toLowerCase().includes(keyword)
+        );
+      });
 
-      matchesDateRange = awardDate >= start && awardDate <= end;
-    }
+      setFilteredAwards(result);
+    }, 300);
 
-    return matchesSearch && matchesDateRange;
-  });
+    return () => clearTimeout(timeout);
+  }, [searchTerm, awards]);
 
   const getAllImages = (award: Award): string[] => {
     const images = [award.file];
@@ -161,10 +179,17 @@ const Penghargaan = () => {
     setSelectedImage(currentImages[newIndex]);
   };
 
-  const resetFilters = () => {
+  const resetFilters = async () => {
     setSearchTerm("");
     setStartDate("");
     setEndDate("");
+    const data = await getListAwards();
+    const sortedData = data.sort((a: any, b: any) => {
+      // Sort by cwdate (format: YYYYMMDD) descending (terbaru dulu)
+      return parseInt(b.cwdate) - parseInt(a.cwdate);
+    });
+    setAwards(sortedData);
+    setFilteredAwards(sortedData);
   };
 
   const AwardCard = ({ award, index }: { award: Award; index: number }) => {
@@ -338,9 +363,8 @@ const Penghargaan = () => {
               </label>
               <div className="relative">
                 <input
-                  ref={startDateInputRef}
                   type="date"
-                  onChange={handleStartDateSelect}
+                  onInput={handleStartDateSelect}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-datetime-edit]:opacity-0"
                 />
                 {startDate ? (
@@ -380,7 +404,7 @@ const Penghargaan = () => {
                 <input
                   ref={endDateInputRef}
                   type="date"
-                  onChange={handleEndDateSelect}
+                  onInput={handleEndDateSelect}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-datetime-edit]:opacity-0"
                 />
                 {endDate ? (

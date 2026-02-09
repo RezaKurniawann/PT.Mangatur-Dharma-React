@@ -276,7 +276,7 @@ const MoreContentPage = () => {
         setAllContent([]);
         setDisplayedContent([]);
       } finally {
-        setLoading(false);
+        setTimeout(() => setLoading(false), 300);
       }
     };
 
@@ -305,7 +305,7 @@ const MoreContentPage = () => {
       }
 
       setLoadingMore(false);
-    }, 300);
+    }, 600);
   }, [currentPage, allContent, loadingMore, hasMore]);
 
   // --- NEW: useEffect to sync state with URL params ---

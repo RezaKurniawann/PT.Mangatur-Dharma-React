@@ -9,6 +9,8 @@ interface ProductCategory {
   tsnomriy: number;
 }
 
+const CATEGORIES_HEADER = ["bahan bakar", "oli", "udara", "hvac", "lainnya"];
+
 const Header = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,12 +30,23 @@ const Header = () => {
         // Sort categories: move "Lainnya" to the end
         const sortedCategories = categories.sort((a, b) => {
           // Check if category name contains "Lainnya" (case insensitive)
-          const aIsLainnya = a.tssynm.toLowerCase().includes("lainnya");
-          const bIsLainnya = b.tssynm.toLowerCase().includes("lainnya");
+          const aName = a.tssynm.toLowerCase();
+          const bName = b.tssynm.toLowerCase();
 
-          if (aIsLainnya && !bIsLainnya) return 1; // a goes to end
-          if (!aIsLainnya && bIsLainnya) return -1; // b goes to end
-          return a.tsnomriy - b.tsnomriy; // maintain original order for others
+          const aIndex = CATEGORIES_HEADER.findIndex((keyword) =>
+            aName.includes(keyword)
+          );
+
+          const bIndex = CATEGORIES_HEADER.findIndex((keyword) =>
+            bName.includes(keyword)
+          );
+
+          if (aIndex === -1 && bIndex === -1) return 0;
+
+          if (aIndex === -1) return 1;
+          if (bIndex === -1) return -1;
+
+          return aIndex - bIndex;
         });
 
         setProductCategories(sortedCategories);
@@ -108,13 +121,13 @@ const Header = () => {
       ref={headerRef}
       className="bg-gradient-to-l from-[#8EE2FF] via-[#C0FFFE] to-white shadow-sm z-50 sticky top-0"
     >
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3">
           <img
-            src={`${
-              import.meta.env.BASE_URL
-            }/assets/img/logo/logomd-blb.png`} alt="PT Mangatur Dharma Logo" className="w-30 h-14 rounded-full"
+            src={`${import.meta.env.BASE_URL}/assets/img/logo/logomd-blb.png`}
+            alt="PT Mangatur Dharma Logo"
+            className="w-52 h-20 rounded-full"
           />
         </Link>
 
@@ -260,13 +273,13 @@ const Header = () => {
                 >
                   Berita & Aktifitas
                 </Link>
-                <Link
+                {/* <Link
                   to="/berita/artikel"
                   className="block px-4 py-2 text-gray-700 hover:bg-secondary hover:text-primary transition-colors"
                   onClick={() => setActiveDropdown(null)}
                 >
                   Artikel
-                </Link>
+                </Link> */}
                 <Link
                   to="/berita/daftar-pelanggan"
                   className="block px-4 py-2 text-gray-700 hover:bg-secondary hover:text-primary transition-colors"
@@ -428,13 +441,13 @@ const Header = () => {
                   >
                     Aktifitas
                   </Link>
-                  <Link
+                  {/* <Link
                     to="/berita/artikel"
                     className="block text-gray-600 hover:text-primary py-2"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Artikel
-                  </Link>
+                  </Link> */}
                   <Link
                     to="/berita/daftar-pelanggan"
                     className="block text-gray-600 hover:text-primary py-2"

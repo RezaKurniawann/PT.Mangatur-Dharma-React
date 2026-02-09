@@ -321,9 +321,9 @@ const ContentDetail = () => {
           {/* Main Content - Left Side (2 columns) */}
           <div className="lg:col-span-2">
             <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm">
-              <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
+              {/* <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
                 Lorem ipsum dolor sit amet
-              </h2>
+              </h2> */}
 
               <div
                 className="prose max-w-none text-gray-700 leading-relaxed space-y-4 text-justify"

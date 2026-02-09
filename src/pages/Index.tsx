@@ -4,9 +4,10 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import heroImage1 from '../assets/banner1.webp';
-import heroImage2 from '../assets/banner2.webp';
-import heroImage3 from '../assets/banner3.webp';
+import heroImage1 from "../assets/banner1a.webp";
+import heroImage2 from "../assets/banner1.webp";
+import heroImage3 from "../assets/banner2.webp";
+import heroImage4 from "../assets/banner3.webp";
 // import heroImage1 from '../assets/md1.png';
 // import heroImage2 from '../assets/md2.png';
 // import heroImage3 from '../assets/md3.png';
@@ -47,7 +48,7 @@ const settings = {
 };
 
 const Index = () => {
-  const carouselImages = [heroImage1, heroImage2, heroImage3];
+  const carouselImages = [heroImage1, heroImage2, heroImage3, heroImage4];
 
   return (
     <Layout>
