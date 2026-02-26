@@ -176,9 +176,9 @@ const OtherCard = ({
   type: "news" | "article";
   onClick?: () => void;
 }) => {
- const imageUrl = item.file 
-  ? item.file 
-  : `${import.meta.env.BASE_URL}assets/img/placeholder.svg`;
+  const imageUrl = item.file
+    ? item.file
+    : `${import.meta.env.BASE_URL}assets/img/placeholder.svg`;
   const title = type === "news" ? item.cbtitl : item.cetitl;
   const author = type === "news" ? item.cbchid : item.cechid;
   const dateStr = type === "news" ? item.cbpsdt : item.cepsdt;
@@ -417,7 +417,7 @@ const ContentPage = () => {
                   contentType === "news" ? "berita" : "artikel"
                 }...`}
                 value={query}
-                onChange={(e) => handleSearch(e.target.value)} 
+                onChange={(e) => handleSearch(e.target.value)}
                 className="w-full border rounded-md px-4 py-2 pr-10 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
               />
               <div className="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary">
@@ -465,8 +465,23 @@ const ContentPage = () => {
         </div>
       ) : contentData.length === 0 ? (
         <div className="container mx-auto px-4 py-20">
-          <div className="text-center">
-            <p className="text-gray-500 text-lg">
+          <div className="text-center py-12">
+            <div className="w-24 h-24 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
+              <svg
+                className="w-12 h-12 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                />
+              </svg>
+            </div>
+            <p className="text-lg font-semibold text-gray-900 mb-2">
               Tidak ada data yang ditemukan.
             </p>
           </div>
@@ -516,7 +531,9 @@ const ContentPage = () => {
             <div
               className="relative py-12 -mb-12"
               style={{
-                backgroundImage: `url(${import.meta.env.BASE_URL}assets/img/news/other-news-bg.png)`,
+                backgroundImage: `url(${
+                  import.meta.env.BASE_URL
+                }assets/img/news/other-news-bg.png)`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
