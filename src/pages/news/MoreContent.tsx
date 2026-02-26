@@ -412,7 +412,13 @@ const MoreContentPage = () => {
             <div className="w-full md:w-auto">
               <select
                 value={selectedCategory}
-                onChange={(e) => handleCategoryChange(e.target.value)} // <-- Panggil handleCategoryChange
+                onChange={(e) => {
+                  if (e.target.value == "") {
+                    handleBack();
+                  } else {
+                    handleCategoryChange(e.target.value);
+                  }
+                }} // <-- Panggil handleCategoryChange
                 className="w-full md:w-auto border rounded-md px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">All Categories</option>

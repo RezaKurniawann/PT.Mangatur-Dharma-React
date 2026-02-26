@@ -2,6 +2,11 @@ import Layout from "@/components/Layout";
 import React, { useState, useEffect } from "react";
 import { getListAwards } from "@/lib/awards.api";
 import { ChevronLeft, ChevronRight, X, Search, Calendar } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface AwardDetail {
   dwpinoiy: number;
@@ -274,26 +279,33 @@ const Penghargaan = () => {
         </h3>
 
         <div className="relative mt-2">
-          <p
-            className={`text-center mt-2 text-gray-600 text-sm line-clamp-3 ${
-              isDescriptionLong ? "cursor-help" : ""
-            }`}
-            onMouseEnter={() =>
-              isDescriptionLong && setShowDescriptionTooltip(true)
-            }
-            onMouseLeave={() => setShowDescriptionTooltip(false)}
-          >
-            {award.cwdesc}
-          </p>
+          <Tooltip>
+            <TooltipTrigger>
+              <p
+                className={`text-center mt-2 text-gray-600 text-sm line-clamp-3 ${
+                  isDescriptionLong ? "cursor-help" : ""
+                }`}
+                // onMouseEnter={() =>
+                //   isDescriptionLong && setShowDescriptionTooltip(true)
+                // }
+                // onMouseLeave={() => setShowDescriptionTooltip(false)}
+              >
+                {award.cwdesc}
+              </p>
+            </TooltipTrigger>
+            <TooltipContent className="max-w-md max-h-60 overflow-auto bg-gray-900 text-white text-sm rounded-lg p-4 text-center">
+              <p>{award.cwdesc}</p>
+            </TooltipContent>
+          </Tooltip>
 
-          {showDescriptionTooltip && isDescriptionLong && (
+          {/* {showDescriptionTooltip && isDescriptionLong && (
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-80 max-w-[90vw] bg-gray-900 text-white text-sm rounded-lg p-4 shadow-xl z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
               <div className="max-h-60 overflow-y-auto">{award.cwdesc}</div>
               <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1">
                 <div className="border-8 border-transparent border-t-gray-900"></div>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     );

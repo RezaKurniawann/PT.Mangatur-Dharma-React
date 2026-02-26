@@ -127,7 +127,7 @@ const Header = () => {
           <img
             src={`${import.meta.env.BASE_URL}/assets/img/logo/logomd-blb.png`}
             alt="PT Mangatur Dharma Logo"
-            className="w-52 h-20 rounded-full"
+            className="h-20 rounded-full"
           />
         </Link>
 
