@@ -14,9 +14,9 @@ const TentangPerusahaan = () => {
         </div>
         <div className="absolute inset-0">
           <img
-            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-1.png`}
+            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-2.png`}
             alt="Modern office building"
-            className="w-full h-full object-cover opacity-90"
+            className="w-full h-full object-cover opacity-30"
           />
         </div>
         <div className="absolute bottom-0 right-12 mr-10 transform translate-x-1/4 translate-y-1/4">

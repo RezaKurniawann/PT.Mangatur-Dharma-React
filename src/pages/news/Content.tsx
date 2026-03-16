@@ -26,6 +26,8 @@ interface ContentItem {
   cbchid?: string;
   cbpsdt?: string;
   cbcsdt?: string;
+  cbrgdt?: string;
+  "cbrgdt::date"?: string;
   "cbcsdt::bpchar"?: string;
   // Article fields
   cecenoiy?: number;
@@ -34,6 +36,8 @@ interface ContentItem {
   cechid?: string;
   cepsdt?: string;
   cecsdt?: string;
+  cergdt?: string;
+  "cergdt::date"?: string;
   "cecsdt::bpchar"?: string;
   // Common fields
   file: string;
@@ -57,7 +61,7 @@ const LatestBigCard = ({
   const imageUrl = item.file || "/assets/img/placeholder.svg";
   const title = type === "news" ? item.cbtitl : item.cetitl;
   const author = type === "news" ? item.cbchid : item.cechid;
-  const dateStr = type === "news" ? item.cbpsdt : item.cepsdt;
+  const dateStr = type === "news" ? item["cbrgdt::date"] : item["cbrgdt::date"];
 
   const formatDate = (dateStr?: string) => {
     if (!dateStr || dateStr.length !== 8) return "No Date";
@@ -99,7 +103,7 @@ const LatestBigCard = ({
         </h3>
         <div className="flex items-center justify-between text-base text-gray-500 border-t pt-3 mt-auto">
           <span>By "{author || "Admin"}"</span>
-          <span className="whitespace-nowrap">{formatDate(dateStr)}</span>
+          <span className="whitespace-nowrap">{dateStr}</span>
         </div>
       </div>
     </div>
@@ -118,7 +122,7 @@ const LatestSmallCard = ({
   const imageUrl = item.file || "/assets/img/placeholder.svg";
   const title = type === "news" ? item.cbtitl : item.cetitl;
   const author = type === "news" ? item.cbchid : item.cechid;
-  const dateStr = type === "news" ? item.cbpsdt : item.cepsdt;
+  const dateStr = type === "news" ? item["cbrgdt::date"] : item["cbrgdt::date"];
 
   const formatDate = (dateStr?: string) => {
     if (!dateStr || dateStr.length !== 8) return "No Date";
@@ -160,7 +164,7 @@ const LatestSmallCard = ({
         </h3>
         <div className="flex items-center justify-between text-base text-gray-500 border-t pt-3 mt-auto">
           <span className="truncate mr-2">By "{author || "Admin"}"</span>
-          <span className="whitespace-nowrap">{formatDate(dateStr)}</span>
+          <span className="whitespace-nowrap">{dateStr}</span>
         </div>
       </div>
     </div>
@@ -181,7 +185,7 @@ const OtherCard = ({
     : `${import.meta.env.BASE_URL}assets/img/placeholder.svg`;
   const title = type === "news" ? item.cbtitl : item.cetitl;
   const author = type === "news" ? item.cbchid : item.cechid;
-  const dateStr = type === "news" ? item.cbpsdt : item.cepsdt;
+  const dateStr = type === "news" ? item["cbrgdt::date"] : item["cbrgdt::date"];
 
   const formatDate = (dateStr?: string) => {
     if (!dateStr || dateStr.length !== 8) return "No Date";
@@ -225,7 +229,7 @@ const OtherCard = ({
         </h3>
         <div className="flex items-center justify-between text-base text-gray-500 border-t pt-3 mt-auto">
           <span>By "{author || "Admin"}"</span>
-          <span className="whitespace-nowrap">{formatDate(dateStr)}</span>
+          <span className="whitespace-nowrap">{dateStr}</span>
         </div>
       </div>
     </div>
@@ -391,9 +395,9 @@ const ContentPage = () => {
         </div>
         <div className="absolute inset-0">
           <img
-            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-1.png`}
+            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-2.png`}
             alt="Background"
-            className="w-full h-full object-cover opacity-90"
+            className="w-full h-full object-cover opacity-30"
           />
         </div>
         <div className="absolute bottom-0 right-12 mr-10 transform translate-x-1/4 translate-y-1/4">

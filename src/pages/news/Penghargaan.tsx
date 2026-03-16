@@ -19,8 +19,10 @@ interface Award {
   cwtitl: string;
   cwdesc: string;
   cwdate: string;
+  "cwdate::date"?: string;
   file: string;
   detail: AwardDetail[];
+  cwrgid?: string;
 }
 
 const Penghargaan = () => {
@@ -90,41 +92,32 @@ const Penghargaan = () => {
     return dateInput.replace(/-/g, "");
   };
 
+  const sortAwards = (data: any[]) =>
+    data.sort((a, b) => parseInt(b.cwdate) - parseInt(a.cwdate));
+
   // Handle date selection from hidden input
   const handleStartDateSelect = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = e.target.value;
-    if (!value) return;
+    const formatted = value ? convertToDateFormat(value) : "";
 
-    const formatted = convertToDateFormat(value);
     setStartDate(formatted);
 
     const data = await getListAwards(formatted, endDate);
-
-    const sortedData = data.sort((a: any, b: any) => {
-      return parseInt(b.cwdate) - parseInt(a.cwdate);
-    });
-
-    setFilteredAwards(sortedData);
+    setFilteredAwards(sortAwards(data));
   };
 
   const handleEndDateSelect = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = e.target.value;
-    if (!value) return;
+    const formatted = value ? convertToDateFormat(value) : "";
 
-    const formatted = convertToDateFormat(value);
     setEndDate(formatted);
 
     const data = await getListAwards(startDate, formatted);
-
-    const sortedData = data.sort((a: any, b: any) => {
-      return parseInt(b.cwdate) - parseInt(a.cwdate);
-    });
-
-    setFilteredAwards(sortedData);
+    setFilteredAwards(sortAwards(data));
   };
 
   useEffect(() => {
@@ -193,6 +186,20 @@ const Penghargaan = () => {
       // Sort by cwdate (format: YYYYMMDD) descending (terbaru dulu)
       return parseInt(b.cwdate) - parseInt(a.cwdate);
     });
+    setAwards(sortedData);
+    setFilteredAwards(sortedData);
+  };
+
+  const resetFilterDate = async (reset: "start" | "end") => {
+    const newStartDate = reset === "start" ? "" : startDate;
+    const newEndDate = reset === "end" ? "" : endDate;
+
+    if (reset === "start") setStartDate("");
+    else setEndDate("");
+
+    const data = await getListAwards(newStartDate, newEndDate);
+    const sortedData = sortAwards(data);
+
     setAwards(sortedData);
     setFilteredAwards(sortedData);
   };
@@ -298,6 +305,10 @@ const Penghargaan = () => {
             </TooltipContent>
           </Tooltip>
 
+          <div className="flex items-center justify-between text-base text-gray-500 border-t pt-3 mt-auto">
+            <span>{award.cwrgid}</span>
+            <span className="whitespace-nowrap">{award["cwdate::date"]}</span>
+          </div>
           {/* {showDescriptionTooltip && isDescriptionLong && (
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-80 max-w-[90vw] bg-gray-900 text-white text-sm rounded-lg p-4 shadow-xl z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
               <div className="max-h-60 overflow-y-auto">{award.cwdesc}</div>
@@ -320,11 +331,11 @@ const Penghargaan = () => {
             <h1 className="text-3xl md:text-5xl font-bold z-50">Penghargaan</h1>
           </div>
         </div>
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 ">
           <img
-            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-1.png`}
+            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-2.png`}
             alt="Background"
-            className="w-full h-full object-cover opacity-90"
+            className="w-full h-full object-cover opacity-30"
           />
         </div>
         <div className="absolute bottom-0 right-12 mr-10 transform translate-x-1/4 translate-y-1/4">
@@ -398,6 +409,7 @@ const Penghargaan = () => {
                       if (startDateInputRef.current) {
                         startDateInputRef.current.value = "";
                       }
+                      resetFilterDate("start");
                     }}
                     className="absolute right-10 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 z-10"
                   >
@@ -438,6 +450,7 @@ const Penghargaan = () => {
                       if (endDateInputRef.current) {
                         endDateInputRef.current.value = "";
                       }
+                      resetFilterDate("end");
                     }}
                     className="absolute right-10 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 z-10"
                   >

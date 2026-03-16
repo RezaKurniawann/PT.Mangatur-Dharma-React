@@ -9,7 +9,14 @@ interface ProductCategory {
   tsnomriy: number;
 }
 
-const CATEGORIES_HEADER = ["bahan bakar", "oli", "udara", "hvac", "lainnya"];
+const CATEGORIES_HEADER = [
+  "bahan bakar",
+  "oli",
+  "udara",
+  "hvac",
+  "turbin",
+  "lainnya",
+];
 
 const Header = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);

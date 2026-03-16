@@ -199,7 +199,7 @@ export async function getArticleCategories(): Promise<any[]> {
 export async function getListProducts(): Promise<any[]> {
   const objParams = {
     params: {
-      Method: "LoadGrid",
+      Method: "LoadGrid_CMS",
       Controller: "CMPROD",
       ApiDB: AppConfig.apiDB,
     },

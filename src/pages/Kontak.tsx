@@ -19,9 +19,9 @@ const Kontak = () => {
         </div>
         <div className="absolute inset-0">
           <img
-            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-1.png`}
+            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-2.png`}
             alt="Modern office building"
-            className="w-full h-full object-cover opacity-90"
+            className="w-full h-full object-cover opacity-30"
           />
         </div>
         <div className="absolute bottom-0 right-12 mr-10 transform translate-x-1/4 translate-y-1/4">
@@ -34,10 +34,9 @@ const Kontak = () => {
       </div>
 
       <div className="container mx-auto px-4 py-18 ">
-        <div className="text-black text-3xl mt-5 font-bold ">Sales Person </div>
+        {/* <div className="text-black text-3xl mt-5 font-bold ">Sales Person </div> */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 mt-5 ">
-          {/* Gilang Bagaskara */}
-          <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow">
+          {/* <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow">
             <div className="h-full flex items-center">
               <div>
                 <div className="flex items-center text-primary space-x-2">
@@ -57,7 +56,6 @@ const Kontak = () => {
               </div>
             </div>
           </div>
-          {/* Gusti Ngurah */}
           <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow">
             <div className="h-full flex items-center">
               <div>
@@ -76,7 +74,6 @@ const Kontak = () => {
               </div>
             </div>
           </div>
-          {/* Andre Heriyanto */}
           <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow">
             <div className="h-full flex items-center">
               <div>
@@ -97,7 +94,6 @@ const Kontak = () => {
               </div>
             </div>
           </div>
-          {/* David Edilka */}
           <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow">
             <div className="h-full flex items-center">
               <div>
@@ -116,8 +112,7 @@ const Kontak = () => {
                 </div>
               </div>
             </div>
-          </div>
-          {/* Contact Us */}
+          </div> */}
           <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow">
             <ul>
               <li>
@@ -184,10 +179,10 @@ const Kontak = () => {
                   PT Mangatur Dharma - Jakarta
                 </h3>
                 <p className="text-gray-600">
-                  Wisma ADR, Jl. Pluit Raya I No. 1,
+                  ADR Tower. Pantai Indah Kapuk St Boulevard, RT.6/RW.2,
                 </p>
                 <p className="text-gray-600">
-                  Penjaringan, Jakarta Utara 14440
+                  Kamal Muara, Penjaringan, North Jakarta City, Jakarta 14470
                 </p>
                 <p className=" mt-5">Telp. 021 – 598 7227 / 598 7235</p>
               </div>
@@ -221,7 +216,7 @@ const Kontak = () => {
             </h3>
             <div className="h-64 rounded-lg overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.0272622538623!2d106.80137837393208!3d-6.127033660073648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1ded503fffff%3A0xbaf2eb7a07ba8747!2sPT%20Mangatur%20Dharma!5e0!3m2!1sid!2sid!4v1756888905992!5m2!1sid!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.1543930693615!2d106.73738279999999!3d-6.109904899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1d780b58fba7%3A0xc09c1e181e7d91d5!2sADR%20OFFICE%20TOWER!5e0!3m2!1sid!2sid!4v1772695211419!5m2!1sid!2sid"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
