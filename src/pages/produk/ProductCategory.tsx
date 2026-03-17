@@ -186,7 +186,7 @@ const ProductCategory = () => {
 
   const isOtherCategory = category?.tssynm?.toLowerCase() === "lainnya";
   const displayCategoryName = isOtherCategory
-    ? "Other Products"
+    ? "Lainnya"
     : category?.tssynm;
   const maintenanceImageSrc = `${
     import.meta.env.BASE_URL
@@ -231,12 +231,12 @@ const ProductCategory = () => {
                   {displayCategoryName}
                 </h2>
                 <div className="h-1 w-20 rounded-full bg-gradient-to-r from-teal-dark via-primary to-teal-light" />
-                {featuredProduct?.cdcdnm &&
+                {/* {featuredProduct?.cdcdnm &&
                 featuredProduct.cdcdnm !== displayCategoryName ? (
                   <p className="text-sm font-medium uppercase tracking-[0.18em] text-slate-400">
                     {featuredProduct.cdcdnm}
                   </p>
-                ) : null}
+                ) : null} */}
               </div>
 
               <div className="mt-8">
