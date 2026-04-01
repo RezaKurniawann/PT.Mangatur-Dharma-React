@@ -383,7 +383,7 @@ const ProductCategory = () => {
 
                     {/* Hover Content - Description */}
                     <div
-                      className={`absolute inset-0 p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-blue-100 flex flex-col justify-center transition-all duration-500 ${
+                      className={`absolute inset-0 p-4 sm:p-6 bg-white flex flex-col justify-center transition-all duration-500 ${
                         hoveredIndex === index
                           ? "opacity-100 scale-100"
                           : "opacity-0 scale-95"
