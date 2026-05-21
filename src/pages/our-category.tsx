@@ -2,9 +2,9 @@ import Layout from "@/components/Layout";
 
 const contents = [
   {
-    title: "Automotif",
+    title: "Otomotif",
     img: `${import.meta.env.BASE_URL}/assets/img/item/category/ktgr1.png`,
-    desc: "Kami menyediakan filtrasi yang dirancang khusus dari Kendaraan sedan, kendaraan penumpang, hingga kendaraan komersial. Filter kami membantu menjaga komponen mesin tetap bersih, sehingga usia mesin, dan memberikan performa mesin yang optimal selama berkendara.",
+    desc: "Kami menyediakan filtrasi yang dirancang khusus untuk kendaraan penumpang, hingga kendaraan komersial. Filter kami membantu menjaga komponen mesin tetap bersih, sehingga usia mesin, dan memberikan performa mesin yang optimal selama berkendara.",
   },
   {
     title: "Alat Berat",

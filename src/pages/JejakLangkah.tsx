@@ -18,10 +18,10 @@ const JejakLangkah = () => {
       </div>
 
       <div className="container mx-auto p-4 md:py-12">
-        <div className="bg-white rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow overflow-hidden relative ">
+        <div className="rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow overflow-hidden relative ">
           <img src={`${import.meta.env.BASE_URL}/assets/img/item/jejak-langkah.png`} alt="Company Roadmap Timeline" className="w-full h-auto object-cover" />
         </div>
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+        {/* <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
           <div className="bg-white p-6 rounded-lg shadow-md flex items-start space-x-4">
             <div className="w-12 h-12 bg-green-700 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">1976</div>
             <div>
@@ -69,7 +69,7 @@ const JejakLangkah = () => {
               <p className="text-gray-600 mt-1">Menjadi Sole Agent PT Selamat Sempurna untuk GTS, HVAC & Filter</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </Layout>
   );

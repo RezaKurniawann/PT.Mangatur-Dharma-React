@@ -107,9 +107,9 @@ const Index = () => {
                   className="w-10 h-10 text-primary"
                 />
               </div>
-              <h3 className="font-semibold text-primary mb-2">Automotive</h3>
+              <h3 className="font-semibold text-primary mb-2">Otomotif</h3>
               <p className="text-sm text-gray-600">
-                Fuel Filter, Air Filter, Oil Filter
+                Filter Bensin, Filter Udara, Filter Oli
               </p>
             </div>
 
@@ -124,9 +124,9 @@ const Index = () => {
                   className="w-8 h-8 text-primary"
                 />
               </div>
-              <h3 className="font-semibold text-primary mb-2">Heavy Duty</h3>
+              <h3 className="font-semibold text-primary mb-2">Alat Berat</h3>
               <p className="text-sm text-gray-600">
-                Mining, Construction, Agriculture Filters
+                Pertambangan, Pembangunan, Filter Agrikultur
               </p>
             </div>
 
@@ -141,9 +141,9 @@ const Index = () => {
                   className="w-8 h-8 text-primary"
                 />
               </div>
-              <h3 className="font-semibold text-primary mb-2">Industrial</h3>
+              <h3 className="font-semibold text-primary mb-2">Industri</h3>
               <p className="text-sm text-gray-600">
-                Manufacturing, Power Plant, Compressor
+                Manufaktur, Pembangkit Listrik, Kompresor
               </p>
             </div>
 
@@ -156,9 +156,11 @@ const Index = () => {
                   className="w-8 h-8 text-primary"
                 />
               </div>
-              <h3 className="font-semibold text-primary mb-2">HVAC</h3>
+              <h3 className="font-semibold text-primary mb-2">
+                Sistem Tata Udara (HVAC)
+              </h3>
               <p className="text-sm text-gray-600">
-                Hospital, Pharmacy, Food & Beverage, Building
+                Rumah Sakit, Farmasi, Makanan & Minuman, Bangunan
               </p>
             </div>
           </div>

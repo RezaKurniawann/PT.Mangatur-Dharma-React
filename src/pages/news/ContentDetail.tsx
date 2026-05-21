@@ -262,14 +262,12 @@ const ContentDetail = () => {
       <div className="container mx-auto px-4 py-8 md:py-12">
         {/* Featured Image - Full Width */}
         <div
-          className="w-full bg-gray-200 mb-4 overflow-hidden rounded-lg"
-          style={{ maxHeight: "500px" }}
+          className="w-full bg-gray-200 mb-4 rounded-lg"
         >
           <img
             src={imageUrl}
             alt={title}
-            className="w-full h-full object-cover"
-            style={{ maxHeight: "500px" }}
+            className="w-full h-full object-scale-down aspect-auto max-h-[500px]"
           />
         </div>
 

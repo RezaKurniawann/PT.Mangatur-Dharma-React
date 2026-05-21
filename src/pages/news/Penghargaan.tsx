@@ -300,7 +300,7 @@ const Penghargaan = () => {
                 {award.cwdesc}
               </p>
             </TooltipTrigger>
-            <TooltipContent className="max-w-md max-h-60 overflow-auto bg-gray-900 text-white text-sm rounded-lg p-4 text-center">
+            <TooltipContent className="max-w-md max-h-60 overflow-auto bg-[#009FC3] text-white text-sm rounded-lg p-4 text-center">
               <p>{award.cwdesc}</p>
             </TooltipContent>
           </Tooltip>
