@@ -178,14 +178,14 @@ const Kontak = () => {
                 <h3 className="font-semibold text-gray-800">
                   PT Mangatur Dharma - Jakarta
                 </h3>
-                <p className="text-gray-600">ADR Tower, Lantai 20.</p>
+                <p className="text-gray-600">ADR Tower, Lantai 20</p>
                 <p className="text-gray-600">
-                  Pantai Indah Kapuk Boulevard, Jakarta 14470 - Indonesia
+                  Jl. Pantai Indah Kapuk Boulevard, Jakarta 14470 - Indonesia
                 </p>
 
                 <div className="mt-5 grid grid-cols-[3rem_1fr] gap-x-2">
                   <span>Telp.</span>
-                  <span>(62-21) 3951 8888</span>
+                  <span>(62-21) 3951 8888 (Hunting)</span>
                   <span>Fax. </span>
                   <span>(62-21) 3951 8880</span>
                 </div>
@@ -200,16 +200,16 @@ const Kontak = () => {
                   PT Mangatur Dharma – Tangerang
                 </h3>
                 <p className="text-gray-600">
-                  Komplek Industri ADR Group, Jl. Raya LPPU Curug No. 88,
+                  Komplek Industri ADR Group, Jl. Raya LPPU Curug No. 88
                 </p>
                 <p className="text-gray-600">
                   {" "}
                   Desa Kadujaya, Bitung, Tangerang 15810 - Indonesia
                 </p>
                 <div className="mt-5 grid grid-cols-[3rem_1fr] gap-x-2">
-                  <span>Telp 1.</span>
+                  <span>Telp.</span>
                   <span>(62-21) 598 7227</span>
-                  <span>Telp 2.</span>
+                  <span></span>
                   <span>(62-21) 598 7235</span>
                 </div>
               </div>

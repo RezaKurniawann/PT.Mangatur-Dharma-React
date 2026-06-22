@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout';
+import Layout from "@/components/Layout";
 
 const VisiMisi = () => {
   return (
@@ -10,10 +10,20 @@ const VisiMisi = () => {
           </div>
         </div>
         <div className="absolute inset-0">
-          <img src={`${import.meta.env.BASE_URL}/assets/img/item/bg-2.png`} alt="Modern office building" className="w-full h-full object-cover opacity-30" />
+          <img
+            src={`${import.meta.env.BASE_URL}/assets/img/item/bg-2.png`}
+            alt="Modern office building"
+            className="w-full h-full object-cover opacity-30"
+          />
         </div>
         <div className="absolute bottom-0 right-12 mr-10 transform translate-x-1/4 translate-y-1/4">
-          <img src={`${import.meta.env.BASE_URL}/assets/img/item/icon-2-ngeker.png`} alt="About Us" className="w-36 md:w-56 md:max-h-[calc(20vh)] object-contain" />
+          <img
+            src={`${
+              import.meta.env.BASE_URL
+            }/assets/img/item/icon-2-ngeker.png`}
+            alt="About Us"
+            className="w-36 md:w-56 md:max-h-[calc(20vh)] object-contain"
+          />
         </div>
       </div>
 
@@ -22,40 +32,58 @@ const VisiMisi = () => {
           {/* Visi */}
           <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow ">
             <h2 className="text-2xl font-bold text-primary mb-6">Visi</h2>
-            <p className="text-lg leading-relaxed text-gray-700">Menjadi perusahaan terbaik di Indonesia untuk pengadaan komponen industri dan alat berat lainnya</p>
+            <p className="text-lg text-justify leading-relaxed text-gray-700">
+              Menjadi perusahaan terbaik di Indonesia untuk pengadaan komponen
+              industri dan alat berat lainnya.
+            </p>
           </div>
 
           {/* Misi */}
           <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow">
             <h2 className="text-2xl font-bold text-primary mb-6">Misi</h2>
-            <p className="text-lg leading-relaxed text-gray-700">
-              Menjadi perusahaan unggulan di Indonesia yang menghadirkan solusi bagi Industri (Pembangkit listrik, Migas, Otomotif, pertambangan, maritim dan sistem tata udara) dengan produk berkualitas, harga bersaing, serta distribusi yang luas dan terpercaya.
+            <p className="text-lg text-justify leading-relaxed text-gray-700">
+              Menjadi perusahaan unggulan di Indonesia yang menghadirkan solusi
+              bagi Industri (Pembangkit Listrik, Migas, Otomotif, Pertambangan,
+              Maritim dan Sistem Tata Udara) dengan produk berkualitas, harga
+              bersaing, serta distribusi yang luas dan terpercaya.
             </p>
           </div>
         </div>
 
         {/* Nilai Inti */}
         <div className="bg-white p-8 rounded-lg mt-8 shadow-lg border border-gray-300 hover:shadow-xl transition-shadow">
-          <h2 className="text-2xl font-bold text-primary mb-6">Nilai Inti Perseroan</h2>
+          <h2 className="text-2xl font-bold text-primary mb-6">
+            Nilai Inti Perseroan
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <div className="w-6 h-6 bg-primary rounded-full text-white text-sm flex items-center justify-center font-bold">1</div>
-                <p className="text-gray-700">Berkembang bersama stakeholders</p>
+                <div className="w-6 h-6 bg-primary rounded-full text-white text-sm flex items-center justify-center font-bold">
+                  1
+                </div>
+                <p className="text-gray-700">Berkembang bersama stakeholders.</p>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="w-6 h-6 bg-primary rounded-full text-white text-sm flex items-center justify-center font-bold">2</div>
-                <p className="text-gray-700">Berjuang menjadi yang terbaik</p>
+                <div className="w-6 h-6 bg-primary rounded-full text-white text-sm flex items-center justify-center font-bold">
+                  2
+                </div>
+                <p className="text-gray-700">Berjuang menjadi yang terbaik.</p>
               </div>
             </div>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <div className="w-6 h-6 bg-primary rounded-full text-white text-sm flex items-center justify-center font-bold">3</div>
-                <p className="text-gray-700">Saling menghargai sebagai anggota tim</p>
+                <div className="w-6 h-6 bg-primary rounded-full text-white text-sm flex items-center justify-center font-bold">
+                  3
+                </div>
+                <p className="text-gray-700">
+                  Saling menghargai sebagai anggota tim.
+                </p>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="w-6 h-6 bg-primary rounded-full text-white text-sm flex items-center justify-center font-bold">4</div>
-                <p className="text-gray-700">Tanggap terhadap perubahan</p>
+                <div className="w-6 h-6 bg-primary rounded-full text-white text-sm flex items-center justify-center font-bold">
+                  4
+                </div>
+                <p className="text-gray-700">Tanggap terhadap perubahan.</p>
               </div>
             </div>
           </div>

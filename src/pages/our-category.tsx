@@ -66,7 +66,7 @@ const OurCategory = () => {
                 />
               </div>
               <h3 className="font-bold text-2xl text-center mt-2">{item.title}</h3>
-              <p className="text-center mt-2 tracking-wider">{item.desc}</p>
+              <p className="mt-2 text-justify tracking-wider">{item.desc}</p>
             </div>
           ))}
         </div>

@@ -289,7 +289,7 @@ const Penghargaan = () => {
           <Tooltip>
             <TooltipTrigger>
               <p
-                className={`text-center mt-2 text-gray-600 text-sm line-clamp-3 ${
+                className={`text-justify mt-2 text-gray-600 text-sm line-clamp-3 ${
                   isDescriptionLong ? "cursor-help" : ""
                 }`}
                 // onMouseEnter={() =>
@@ -300,7 +300,7 @@ const Penghargaan = () => {
                 {award.cwdesc}
               </p>
             </TooltipTrigger>
-            <TooltipContent className="max-w-md max-h-60 overflow-auto bg-[#009FC3] text-white text-sm rounded-lg p-4 text-center">
+            <TooltipContent className="max-w-md max-h-60 overflow-auto bg-[#009FC3] text-white text-sm rounded-lg p-4 text-justify">
               <p>{award.cwdesc}</p>
             </TooltipContent>
           </Tooltip>

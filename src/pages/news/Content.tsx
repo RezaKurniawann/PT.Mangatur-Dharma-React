@@ -94,7 +94,7 @@ const LatestBigCard = ({
         <img
           src={imageUrl}
           alt={title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
       </div>
       <div className="p-4 flex flex-col flex-1">

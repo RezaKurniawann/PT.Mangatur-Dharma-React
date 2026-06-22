@@ -31,13 +31,13 @@ const TentangPerusahaan = () => {
       <div className="container mx-auto px-4 py-12 ">
         <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow">
           <div className="space-y-6">
-            <p className="text-lg leading-relaxed text-gray-700">
+            <p className="text-lg text-justify leading-relaxed text-gray-700">
               <strong>PT Mangatur Dharma</strong> (selanjutnya disebut
               Perseroan) berdiri tahun 1976 bermula dari perdagangan filter GTS
               (Gas Turbine System) dengan merek Donaldson,
             </p>
 
-            <p className="text-lg leading-relaxed text-gray-700">
+            <p className="text-lg text-justify leading-relaxed text-gray-700">
               Pada tahun 1988 bergabung dengan ADR Group of Companies dan
               mengembangkan sayapnya tidak hanya pada filter GTS tetapi filter
               filter jenis lain untuk Alat Berat Pertambangan, Jasa Konstruksi,
@@ -45,12 +45,12 @@ const TentangPerusahaan = () => {
               untuk kebutuhan industri.
             </p>
 
-            <p className="text-lg leading-relaxed text-gray-700">
+            <p className="text-lg text-justify leading-relaxed text-gray-700">
               Pada tahun 2024 PT Prapat Tunggal Cipta, Entitas Anak PT Selamat
               Sempurna Tbk. menjadi pemegang saham utama Perseroan.
             </p>
 
-            <p className="text-lg leading-relaxed text-gray-700">
+            <p className="text-lg text-justify leading-relaxed text-gray-700">
               Berlokasi di Jakarta dan Tangerang, Perseroan menjadi pemasok
               terpercaya ke berbagai Perusahaan Pembangkit Listrik,
               Pertambangan, Jasa Konstruksi, Transportasi, Rumah sakit, Farmasi
