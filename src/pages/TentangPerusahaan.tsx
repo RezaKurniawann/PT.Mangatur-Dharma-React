@@ -47,7 +47,7 @@ const TentangPerusahaan = () => {
 
             <p className="text-lg text-justify leading-relaxed text-gray-700">
               Pada tahun 2024 PT Prapat Tunggal Cipta, Entitas Anak PT Selamat
-              Sempurna Tbk. menjadi pemegang saham utama Perseroan.
+              Sempurna Tbk menjadi pemegang saham utama Perseroan.
             </p>
 
             <p className="text-lg text-justify leading-relaxed text-gray-700">

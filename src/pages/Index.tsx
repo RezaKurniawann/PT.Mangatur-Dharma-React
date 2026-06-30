@@ -75,7 +75,7 @@ const Index = () => {
       <section className="lg:py-8 bg-white">
         <div className="container mx-auto px-4">
           <div className="container text-center mx-auto px-4 py-6 md:py-12">
-            <p className="text-sm md:text-base lg:text-lg leading-relaxed text-gray-700">
+            <p className="text-sm md:text-base lg:text-lg leading-relaxed text-justify text-gray-700">
               PT Mangatur Dharma merupakan perusahaan yang bergerak di bidang
               penyediaan solusi filtrasi untuk berbagai kebutuhan industri. Kami
               berkomitmen untuk menyediakan produk filter dengan kualitas tinggi

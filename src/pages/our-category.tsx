@@ -9,7 +9,7 @@ const contents = [
   {
     title: "Alat Berat",
     img: `${import.meta.env.BASE_URL}/assets/img/item/category/ktgr2.png`,
-    desc: "Solusi Filtrasi untuk Kendaraan Berat & Mesin Berkinerja Tinggi, mencakup berbagai jenis filter yang dirancang khusus untuk mesin dengan beban kerja berat, seperti alat berat konstruksi, truk tambang, kendaraan militer, peralatan agrikultur dan lainnya. Produk kami menjamin perlindungan maksimal terhadap kontaminasi yang dapat merusak sistem vital mesin Anda.",
+    desc: "Solusi Filtrasi untuk Kendaraan Berat & Mesin Berkinerja Tinggi, mencakup berbagai jenis filter yang dirancang khusus untuk mesin dengan beban kerja berat, seperti alat berat konstruksi, truk tambang, kendaraan militer, peralatan agrikultur dan lainnya. Produk kami menjamin perlindungan maksimal terhadap kontaminasi partikel mikro, debu ekstrem, jelaga, ari, hingga residu bahan bakar yang dapat merusak sistem vital mesin Anda.",
   },
   {
     title: "Industrial",
